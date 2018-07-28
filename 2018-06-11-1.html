@@ -1,0 +1,874 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="CnfyuWLAJaBycXiHVHkCfGLzqW5JiUIMAZGBbRd8iRs" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="7RkZahD6PE" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, iOS开发, iOS, 个人博客" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="王权伟の博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Overview近期在开发偶遇优选2.0时遇到一个奇葩问题：UITableViewHeaderFooterView使用autolayout时报约束异常，但显示上一切正常。经过一番排查，约束并无冲突。网上有看到说因为使用了复用才会出现这问题，这里并不是通过取消复用来解决此问题。虽问题解决，但甚是不解。望大神答疑解惑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法">
+<meta property="og:url" content="http://www.wangquanwei.com/2018-06-11-1.html">
+<meta property="og:site_name" content="王权伟の博客">
+<meta property="og:description" content="Overview近期在开发偶遇优选2.0时遇到一个奇葩问题：UITableViewHeaderFooterView使用autolayout时报约束异常，但显示上一切正常。经过一番排查，约束并无冲突。网上有看到说因为使用了复用才会出现这问题，这里并不是通过取消复用来解决此问题。虽问题解决，但甚是不解。望大神答疑解惑。">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/ios7_dev.png">
+<meta property="og:image" content="https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=653c67e15efbb2fb202650402e234bc1/8cb1cb1349540923e1860cc29958d109b2de499a.jpg">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/B3A05CE1-FC4F-4B37-9892-0404DAF8D7F9.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/5F77FAD1-DE9E-419C-A367-8D3F7284E648.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/67BBB6D7-1D28-48C1-A201-198668CF7D63.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/1C550D68-D438-4992-915E-3BDF65088405.png">
+<meta property="og:updated_time" content="2018-07-26T14:00:49.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法">
+<meta name="twitter:description" content="Overview近期在开发偶遇优选2.0时遇到一个奇葩问题：UITableViewHeaderFooterView使用autolayout时报约束异常，但显示上一切正常。经过一番排查，约束并无冲突。网上有看到说因为使用了复用才会出现这问题，这里并不是通过取消复用来解决此问题。虽问题解决，但甚是不解。望大神答疑解惑。">
+<meta name="twitter:image" content="http://ojgg6fpio.bkt.clouddn.com/ios7_dev.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.wangquanwei.com/2018-06-11-1.html"/>
+
+
+
+
+
+  <title>UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法 | 王权伟の博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5a6672e8545f0d238d33c35a4f4f89f5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王权伟の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">好记性不如烂笔头</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.wangquanwei.com/2018-06-11-1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王权伟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王权伟の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-11T11:37:08+08:00">
+                2018-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018-06-11-1.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018-06-11-1.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/ios7_dev.png" alt="image"><br><br></div>
+
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>近期在开发偶遇优选2.0时遇到一个奇葩问题：UITableViewHeaderFooterView使用autolayout时报约束异常，但显示上一切正常。经过一番排查，约束并无冲突。网上有看到说因为使用了复用才会出现这问题，这里并不是通过取消复用来解决此问题。虽问题解决，但甚是不解。望大神答疑解惑。<br><a id="more"></a></p>
+<div align="center"><br><br><img src="https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=653c67e15efbb2fb202650402e234bc1/8cb1cb1349540923e1860cc29958d109b2de499a.jpg" alt="image"><br><br></div>
+
+<h1 id="异常示例"><a href="#异常示例" class="headerlink" title="异常示例"></a>异常示例</h1><div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/B3A05CE1-FC4F-4B37-9892-0404DAF8D7F9.png" alt="image"><br><br></div><br>上图红框部分用到了UITableViewHeaderFooterView，作为section的头，并不是UITableView的headerView。<br><br><br>这是初始化了UITableViewHeaderFooterView子视图的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div></pre></td><td class="code"><pre><div class="line">- (void)initUI &#123;</div><div class="line">    </div><div class="line">    self.contentView.backgroundColor = [UIColor whiteColor];</div><div class="line">    </div><div class="line">    //商家logo</div><div class="line">    self.logoImageView = [[UIImageView alloc] init];</div><div class="line">    self.logoImageView.backgroundColor = RGB_HEX(0xffffff);</div><div class="line">    self.logoImageView.layer.borderWidth = 1.f;</div><div class="line">    self.logoImageView.layer.borderColor = RGB_HEX(0xbfbfbf).CGColor;</div><div class="line">    self.logoImageView.layer.cornerRadius = 50/2.f;</div><div class="line">    self.logoImageView.clipsToBounds = YES;</div><div class="line">    [self addSubview:self.logoImageView];</div><div class="line">    </div><div class="line">    //店铺名</div><div class="line">    self.storeNameLabel = [[UILabel alloc] init];</div><div class="line">    self.storeNameLabel.font = [UIFont boldSystemFontOfSize:kHeight(32)];</div><div class="line">    self.storeNameLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    [self addSubview:self.storeNameLabel];</div><div class="line">    </div><div class="line">    //套餐背景视图</div><div class="line">    self.comboImageView = [[UIImageView alloc] init];</div><div class="line">//    self.comboImageView.contentMode = UIViewContentModeScaleAspectFit;</div><div class="line">    self.comboImageView.image = [UIImage imageNamed:@&quot;order_rectangle&quot;];</div><div class="line">    [self addSubview:self.comboImageView];</div><div class="line">    </div><div class="line">    //套餐视图</div><div class="line">    self.comboView = [[UIView alloc] init];</div><div class="line">    self.comboView.clipsToBounds = YES;</div><div class="line">    self.comboView.layer.cornerRadius = 4.f;</div><div class="line">    [self addSubview:self.comboView];</div><div class="line">    </div><div class="line">    //商品图片</div><div class="line">    self.merchandiseImageView = [[UIImageView alloc] init];</div><div class="line">    self.merchandiseImageView.clipsToBounds = YES;</div><div class="line">    self.merchandiseImageView.contentMode = UIViewContentModeScaleAspectFill;</div><div class="line">//    self.merchandiseImageView.backgroundColor = [UIColor randomColor];</div><div class="line">    [self.comboView addSubview:self.merchandiseImageView];</div><div class="line">    </div><div class="line">    //商品标题</div><div class="line">    self.titleLabel = [[UILabel alloc] init];</div><div class="line">    self.titleLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    self.titleLabel.font = [UIFont boldSystemFontOfSize:kHeight(32)];</div><div class="line">    [self.comboView addSubview:self.titleLabel];</div><div class="line">    </div><div class="line">    //有效期</div><div class="line">    self.expirationTimeLabel = [[UILabel alloc] init];</div><div class="line">    self.expirationTimeLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    self.expirationTimeLabel.font = [UIFont pingFangRegularFontOfSize:kHeight(24)];</div><div class="line">    [self.comboView addSubview:self.expirationTimeLabel];</div><div class="line">    </div><div class="line">    //左线条</div><div class="line">    self.leftLineView = [[UIView alloc] init];</div><div class="line">    self.leftLineView.backgroundColor = RGB_HEX(0x000000);</div><div class="line">    [self.comboView addSubview:self.leftLineView];</div><div class="line">    </div><div class="line">    //右线条</div><div class="line">    self.rightLineView = [[UIView alloc] init];</div><div class="line">    self.rightLineView.backgroundColor = RGB_HEX(0x000000);</div><div class="line">    [self.comboView addSubview:self.rightLineView];</div><div class="line">    </div><div class="line">    //当前砍价人数</div><div class="line">    self.currentBargainLabel = [[UILabel alloc] init];</div><div class="line">    self.currentBargainLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    self.currentBargainLabel.font = [UIFont pingFangRegularFontOfSize:kHeight(24)];</div><div class="line">    [self.comboView addSubview:self.currentBargainLabel];</div><div class="line">    </div><div class="line">    //当前价格</div><div class="line">    self.bargainPriceLabel = [[UILabel alloc] init];</div><div class="line">    self.bargainPriceLabel.textColor = RGB_HEX(0xb4282d);</div><div class="line">    self.bargainPriceLabel.font = [UIFont pingFangMediumFontOfSize:kHeight(26)];</div><div class="line">    [self addSubview:self.bargainPriceLabel];</div><div class="line">    </div><div class="line">    //进度条倒三角</div><div class="line">    self.progressTriangleImageView = [[UIImageView alloc] init];</div><div class="line">//    self.progressTriangleImageView.image = [UIImage imageNamed:@&quot;order_progress_triangle&quot;];</div><div class="line">    [self addSubview:self.progressTriangleImageView];</div><div class="line">    </div><div class="line">    //进度条</div><div class="line">    //左右轨的图片</div><div class="line">    UIImage *stetchLeftTrack= [UIImage imageNamed:@&quot;brightness_bar&quot;];</div><div class="line">    UIImage *stetchRightTrack = [UIImage imageNamed:@&quot;brightness_bar_bg&quot;];</div><div class="line">    //滑块图片</div><div class="line">    UIImage *thumbImage = [UIImage imageNamed:@&quot;order_progress_round&quot;];</div><div class="line">    </div><div class="line">    self.slider = [[UISlider alloc] init];</div><div class="line">    self.slider.userInteractionEnabled = NO;</div><div class="line">//    self.slider.enabled = NO; //禁止滑动</div><div class="line">    [self.slider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];</div><div class="line">    [self.slider setMaximumTrackImage:stetchRightTrack forState:UIControlStateNormal];</div><div class="line">    //注意这里要加UIControlStateHightlighted的状态，否则当拖动滑块时滑块将变成原生的控件</div><div class="line">    [self.slider setThumbImage:thumbImage forState:UIControlStateHighlighted];</div><div class="line">    [self.slider setThumbImage:thumbImage forState:UIControlStateNormal];</div><div class="line">    [self addSubview:self.slider];</div><div class="line">    </div><div class="line">    //优选价</div><div class="line">    self.originalPriceLabel = [[UILabel alloc] init];</div><div class="line">    self.originalPriceLabel.numberOfLines = 2;</div><div class="line">    self.originalPriceLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    self.originalPriceLabel.font = [UIFont pingFangRegularFontOfSize:kHeight(26)];</div><div class="line">    </div><div class="line">    [self addSubview:self.originalPriceLabel];</div><div class="line">    </div><div class="line">    //最惠价</div><div class="line">    self.preferentialPriceLabel = [[UILabel alloc] init];</div><div class="line">    self.preferentialPriceLabel.numberOfLines = 2;</div><div class="line">    self.preferentialPriceLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    self.preferentialPriceLabel.font = [UIFont pingFangRegularFontOfSize:kHeight(26)];</div><div class="line">    [self addSubview:self.preferentialPriceLabel];</div><div class="line">    </div><div class="line">    //底部分割线</div><div class="line">    self.bottomLineView = [[UIView alloc] init];</div><div class="line">    self.bottomLineView.backgroundColor = RGB_HEX(0xF2F2F2);</div><div class="line">    [self addSubview:self.bottomLineView];</div><div class="line">    </div><div class="line">    //砍价人数</div><div class="line">    self.bargainNumLabel = [[UILabel alloc] init];</div><div class="line">    self.bargainNumLabel.font = [UIFont pingFangMediumFontOfSize:kHeight(30)];</div><div class="line">    [self addSubview:self.bargainNumLabel];</div><div class="line">    </div><div class="line">    //约束</div><div class="line">    </div><div class="line">    //头像</div><div class="line">    [self.logoImageView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.centerX.equalTo(self);</div><div class="line">        make.top.equalTo(self).offset(kHeight(30));</div><div class="line">        make.width.height.equalTo(50);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //店铺名</div><div class="line">    [self.storeNameLabel makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.right.equalTo(self);</div><div class="line">        make.top.equalTo(self.logoImageView.bottom).offset(kHeight(26));</div><div class="line">    &#125;];</div><div class="line"></div><div class="line">    //套餐视图</div><div class="line">    [self.comboView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.top.equalTo(self.storeNameLabel.bottom).offset(kHeight(34));</div><div class="line">        make.left.equalTo(self).offset(kWidth(52));</div><div class="line">        make.right.equalTo(self).offset(-kWidth(52));</div><div class="line">        make.height.equalTo(kHeight(586));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //套餐背景视图</div><div class="line">    [self.comboImageView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.top.equalTo(self.comboView).offset(-kHeight(10));</div><div class="line">        make.left.equalTo(self.comboView).offset(-kWidth(16));</div><div class="line">        make.right.equalTo(self.comboView).offset(kWidth(16));</div><div class="line">        make.bottom.equalTo(self.comboView).offset(kHeight(10));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //商品图片</div><div class="line">    [self.merchandiseImageView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.top.left.right.equalTo(self.comboView);</div><div class="line">        make.height.equalTo(kHeight(308));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //标题</div><div class="line">    [self.titleLabel makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.right.equalTo(self.comboView);</div><div class="line">        make.top.equalTo(self.merchandiseImageView.bottom).offset(kHeight(46));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //截止日期</div><div class="line">    [self.expirationTimeLabel makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.centerX.equalTo(self.titleLabel);</div><div class="line">        make.top.equalTo(self.titleLabel.bottom).offset(kHeight(26));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //左线条</div><div class="line">    [self.leftLineView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.right.equalTo(self.expirationTimeLabel.left).offset(-kWidth(28));</div><div class="line">        make.centerY.equalTo(self.expirationTimeLabel);</div><div class="line">        make.width.equalTo(kWidth(20));</div><div class="line">        make.height.equalTo(1);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //右线条</div><div class="line">    [self.rightLineView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.equalTo(self.expirationTimeLabel.right).offset(14);</div><div class="line">        make.centerY.equalTo(self.expirationTimeLabel);</div><div class="line">        make.width.equalTo(kWidth(20));</div><div class="line">        make.height.equalTo(1);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //当前参与砍价人数</div><div class="line">    [self.currentBargainLabel makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.right.equalTo(self);</div><div class="line">        make.top.equalTo(self.expirationTimeLabel.bottom).offset(kHeight(30));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //进度条</div><div class="line">    [self.slider makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.top.equalTo(self.comboView.bottom).offset(kHeight(110));</div><div class="line">        make.left.equalTo(self).offset(kWidth(50));</div><div class="line">        make.right.equalTo(self).offset(-kWidth(50));</div><div class="line">        make.height.equalTo(3);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //倒三角</div><div class="line">    [self.progressTriangleImageView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.bottom.equalTo(self.slider.top).equalTo(-kHeight(16));</div><div class="line">        make.left.equalTo(self.slider.left);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //当前价格</div><div class="line">    [self.bargainPriceLabel makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.equalTo(self.slider.left);</div><div class="line">        make.bottom.equalTo(self.progressTriangleImageView.top).offset(-kHeight(10));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //优选价</div><div class="line">    [self.originalPriceLabel makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.equalTo(self.slider);</div><div class="line">        make.top.equalTo(self.slider.bottom).offset(kHeight(16));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //最惠价</div><div class="line">    [self.preferentialPriceLabel makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.right.equalTo(self.slider);</div><div class="line">        make.top.equalTo(self.slider.bottom).offset(kHeight(16));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //底部分割线</div><div class="line">    [self.bottomLineView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.right.equalTo(self);</div><div class="line">        make.top.equalTo(self.preferentialPriceLabel.bottom).offset(kHeight(70));</div><div class="line">        make.height.equalTo(kHeight(20));</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    //砍价好友</div><div class="line">    [self.bargainNumLabel makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        make.left.equalTo(self).offset(kWidth(30));</div><div class="line">        make.right.equalTo(self).offset(-kWidth(30));</div><div class="line">        make.top.equalTo(self.bottomLineView.bottom).offset(kHeight(30));</div><div class="line">        make.bottom.equalTo(self);</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br>这是初始化UITableView的代码<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div></pre></td><td class="code"><pre><div class="line">- (void)initUI &#123;</div><div class="line">    </div><div class="line">    self.title = @&quot;砍价&quot;;</div><div class="line">    </div><div class="line">    self.view.backgroundColor = [UIColor whiteColor];</div><div class="line">    </div><div class="line">    self.table = [UITableView customTableViewWithFrame:CGRectZero</div><div class="line">                                                 style:UITableViewStyleGrouped</div><div class="line">                                        separatorColor:[UIColor clearColor]</div><div class="line">                          estimatedSectionHeaderHeight:UITableViewAutomaticDimension</div><div class="line">                          estimatedSectionFooterHeight:UITableViewAutomaticDimension];</div><div class="line">    self.table.hidden = YES;</div><div class="line">    self.table.backgroundColor = [UIColor whiteColor];</div><div class="line">    self.table.showsVerticalScrollIndicator = NO;</div><div class="line">    self.table.showsHorizontalScrollIndicator = NO;</div><div class="line">    self.table.delegate = self;</div><div class="line">    self.table.dataSource = self;</div><div class="line">    [self.table registerClass:[VCBargainHeaderView class] forHeaderFooterViewReuseIdentifier:@&quot;VCBargainHeaderView&quot;];</div><div class="line">    [self.table registerClass:[VCBargainFriendsCell class] forCellReuseIdentifier:@&quot;VCBargainFriendsCell&quot;];</div><div class="line">    [self.view addSubview:self.table];</div><div class="line">    </div><div class="line">    //底部视图</div><div class="line">    self.bottomView = [[UIView alloc] init];</div><div class="line">    self.bottomView.backgroundColor = [UIColor whiteColor];</div><div class="line">    self.bottomView.hidden = YES;</div><div class="line">    [self.view addSubview:self.bottomView];</div><div class="line">    </div><div class="line">    //分享按钮</div><div class="line">    self.shareBargainBtn = [[UIButton alloc] init];</div><div class="line">    self.shareBargainBtn.layer.cornerRadius = 4.f;</div><div class="line">    self.shareBargainBtn.titleLabel.font = [UIFont pingFangRegularFontOfSize:kHeight(30)];</div><div class="line">    self.shareBargainBtn.backgroundColor = RGB_HEX(0xcc5253);</div><div class="line">    [self.shareBargainBtn setTitle:@&quot;分享砍价&quot; forState:UIControlStateNormal];</div><div class="line">    [self.bottomView addSubview:self.shareBargainBtn];</div><div class="line">    </div><div class="line">    //立即使用</div><div class="line">    self.useBtn = [[UIButton alloc] init];</div><div class="line">    self.useBtn.layer.cornerRadius = 4.f;</div><div class="line">    self.useBtn.layer.borderColor = RGB_HEX(0xb4282d).CGColor;</div><div class="line">    self.useBtn.layer.borderWidth = 1.f;</div><div class="line">    self.useBtn.titleLabel.font = [UIFont pingFangRegularFontOfSize:kHeight(30)];</div><div class="line">    [self.useBtn setTitle:@&quot;立即使用&quot; forState:UIControlStateNormal];</div><div class="line">    [self.useBtn setTitleColor:RGB_HEX(0xb4282d) forState:UIControlStateNormal];</div><div class="line">    [self.bottomView addSubview:self.useBtn];</div><div class="line">    </div><div class="line">    //约束</div><div class="line">    [self.bottomView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        </div><div class="line">        if (@available(iOS 11.0, *)) &#123;</div><div class="line">            make.left.equalTo(self.view.safeAreaLayoutGuideLeft).offset(0);</div><div class="line">            make.right.equalTo(self.view.safeAreaLayoutGuideRight).offset(0);</div><div class="line">            make.bottom.equalTo(self.view.safeAreaLayoutGuideBottom).offset(0);</div><div class="line">        &#125; else &#123;</div><div class="line">            // Fallback on earlier versions</div><div class="line">            make.left.right.bottom.equalTo(self.view);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        make.height.equalTo(73);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">    [self.table makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">        </div><div class="line">        if (@available(iOS 11.0, *)) &#123;</div><div class="line">            make.left.equalTo(self.view.safeAreaLayoutGuideLeft).offset(0);</div><div class="line">            make.right.equalTo(self.view.safeAreaLayoutGuideRight).offset(0);</div><div class="line">            make.top.equalTo(self.view.safeAreaLayoutGuideTop).offset(0);</div><div class="line">            </div><div class="line">        &#125; else &#123;</div><div class="line">            // Fallback on earlier versions</div><div class="line">            make.left.right.top.equalTo(self.view);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        make.bottom.equalTo(self.bottomView.top).offset(0);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br>UITableViewHeaderFooterView代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">static NSString * headerViewStr = @&quot;VCBargainHeaderView&quot;;</div><div class="line">- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section &#123;</div><div class="line">    </div><div class="line">    VCBargainHeaderView * bargainHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerViewStr];</div><div class="line">    </div><div class="line">    if (bargainHeaderView == nil) &#123;</div><div class="line">        bargainHeaderView = (VCBargainHeaderView *)[[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headerViewStr];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [bargainHeaderView setModel:self.viewModel.couponItem];</div><div class="line">    </div><div class="line">    //砍价人数</div><div class="line">    bargainHeaderView.bargainNumLabel.text = [NSString stringWithFormat:@&quot;砍价好友(%d)&quot;,self.viewModel.cutPriceList.count];</div><div class="line">    </div><div class="line">    return bargainHeaderView;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br>运行后约束报错<br><br><div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/5F77FAD1-DE9E-419C-A367-8D3F7284E648.png" alt="image"><br><br></div>
+
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>解决方法1：</p>
+<div align="center"><br><br>异常代码（约束报错）<br><img src="http://ojgg6fpio.bkt.clouddn.com/67BBB6D7-1D28-48C1-A201-198668CF7D63.png" alt="image"><br><br>正常代码（约束不报错）<br><img src="http://ojgg6fpio.bkt.clouddn.com/1C550D68-D438-4992-915E-3BDF65088405.png" alt="image"><br><br></div>
+
+<p>找到与UITableViewHeaderFooterView底部有约束的控件将他与底部的约束优先级改低。如上图（正常代码）所示 即可解决问题</p>
+<p>2、解决方法2（网上看到的，亲测无效）：</p>
+<blockquote>
+<p>使用UITableView的header或footer复用时，如果采用自动布局，你会发现有约束冲突，下面这样写可以消除约束冲突：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"> #import &lt;UIKit/UIKit.h&gt;</div><div class="line"> </div><div class="line"> @interface SectionView : UITableViewHeaderFooterView</div><div class="line"> </div><div class="line"> @property (nonatomic, copy) NSString *sectionTitle;</div><div class="line"> </div><div class="line"> @end</div><div class="line"> </div><div class="line"> #import &quot;SectionView.h&quot;</div><div class="line"> </div><div class="line"> @interface SectionView ()</div><div class="line"> &#123;</div><div class="line">     UIImageView *titleBgImageView;</div><div class="line">     UIImageView *timePonitImageView;</div><div class="line">     UIImageView *circleImageView;</div><div class="line">     UILabel *titleLabe;</div><div class="line"> &#125;</div><div class="line"> @end</div><div class="line"> </div><div class="line"> @implementation SectionView</div><div class="line"> </div><div class="line"> // 带有复用</div><div class="line"> - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier</div><div class="line"> &#123;</div><div class="line">     self = [super initWithReuseIdentifier:reuseIdentifier];</div><div class="line">     if (self) &#123;</div><div class="line">         [self createUI];</div><div class="line">     &#125;</div><div class="line">     return self;</div><div class="line"> &#125;</div><div class="line"> </div><div class="line"> </div><div class="line"> - (void)createUI</div><div class="line"> &#123;</div><div class="line">     titleBgImageView = [[UIImageView alloc] initForAutoLayout];</div><div class="line">     titleBgImageView.userInteractionEnabled = NO;</div><div class="line">     UIImage *image = [UIImage imageNamed:@&quot;event_bottom_line&quot;];</div><div class="line">     image = [image stretchableImageWithLeftCapWidth:image.size.width*0.5 topCapHeight:image.size.height*0.5];</div><div class="line">     titleBgImageView.image = image;</div><div class="line">     [self.contentView addSubview:titleBgImageView];</div><div class="line">     </div><div class="line">     </div><div class="line">     circleImageView = [[UIImageView alloc] initForAutoLayout];</div><div class="line">     UIImage *circleImage = [UIImage imageNamed:@&quot;event_blue1&quot;];</div><div class="line">     circleImage = [circleImage stretchableImageWithLeftCapWidth:circleImage.size.width*0.5 topCapHeight:circleImage.size.height*0.5];</div><div class="line">     </div><div class="line">     circleImageView.image = circleImage;</div><div class="line">     [self.contentView addSubview:circleImageView];</div><div class="line"> </div><div class="line">     </div><div class="line">     timePonitImageView = [[UIImageView alloc] initForAutoLayout];</div><div class="line">     timePonitImageView.image = [UIImage imageNamed:@&quot;event_write_line&quot;];</div><div class="line">     [self.contentView addSubview:timePonitImageView];</div><div class="line">     </div><div class="line">     </div><div class="line">     titleLabe = [[UILabel alloc] initForAutoLayout];</div><div class="line">     titleLabe.font = [UIFont systemFontOfSize:13];</div><div class="line">     titleLabe.textColor = [UIColor whiteColor];</div><div class="line">     titleLabe.textAlignment = NSTextAlignmentCenter;</div><div class="line">     [circleImageView addSubview:titleLabe];</div><div class="line">    </div><div class="line">&#125;</div><div class="line">&gt; </div><div class="line">&gt; 把布局代码写到这里</div><div class="line"> - (void)layoutSubviews</div><div class="line"> &#123;</div><div class="line">     [super layoutSubviews];</div><div class="line">     </div><div class="line">     [titleBgImageView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(0, 0, 0, 0)];</div><div class="line">     </div><div class="line">     [circleImageView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:8];</div><div class="line">     [circleImageView autoPinEdgeToSuperviewEdge:ALEdgeTrailing withInset:8];</div><div class="line">     [circleImageView autoSetDimension:ALDimensionHeight toSize:23];</div><div class="line">     [circleImageView autoAlignAxisToSuperviewAxis:ALAxisHorizontal];</div><div class="line">    </div><div class="line">    [timePonitImageView autoPinEdgeToSuperviewEdge:ALEdgeLeading withInset:16];</div><div class="line">     [timePonitImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:39/2.0-4];</div><div class="line">    [timePonitImageView autoSetDimensionsToSize:CGSizeMake(9, 23.5)];</div><div class="line">    </div><div class="line">     [titleLabe autoCenterInSuperview];</div><div class="line">     [titleLabe autoSetDimension:ALDimensionWidth toSize:200];</div><div class="line">    </div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>该代码来自csdn用户王素燕的博客<a href="https://blog.csdn.net/u010618987/article/details/46744689" target="_blank" rel="external">《UITableViewHeaderFooterView的使用+自动布局》</a>。侵删！</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixin.jpg" alt="王权伟 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/zhifubao.jpg" alt="王权伟 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018-03-31-1.html" rel="next" title="iOS Share Extensions开发教程">
+                <i class="fa fa-chevron-left"></i> iOS Share Extensions开发教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018-06-25-1.html" rel="prev" title="Cannot modify constraints for UITabBar managed by a controller">
+                Cannot modify constraints for UITabBar managed by a controller <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="王权伟" />
+          <p class="site-author-name" itemprop="name">王权伟</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/quanweiwang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://xnxy.github.io/" title="拿根针尖对麦芒" target="_blank">拿根针尖对麦芒</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.wangyangde.cn/" title="web前端开发" target="_blank">web前端开发</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://guyueyang.github.io/" title="杨晓平の博客" target="_blank">杨晓平の博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常示例"><span class="nav-number">2.</span> <span class="nav-text">异常示例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heartƒ√"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王权伟</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wangquanwei.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.wangquanwei.com/2018-06-11-1.html';
+          this.page.identifier = '2018-06-11-1.html';
+          this.page.title = 'UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wangquanwei.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,884 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="CnfyuWLAJaBycXiHVHkCfGLzqW5JiUIMAZGBbRd8iRs" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="7RkZahD6PE" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, iOS开发, iOS, 个人博客" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="王权伟の博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是UIDebuggingInformationOverlayUIDebuggingInformationOverlay是由苹果创建的私有子类，大概是帮助开发人员和设计师调试苹果自己的iOS应用程序。
+启用后，窗口会浮动在应用的内容上，如下所示">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开启iOS自带的调试悬浮窗UIDebuggingInformationOverlay">
+<meta property="og:url" content="http://www.wangquanwei.com/2017-06-03-1.html">
+<meta property="og:site_name" content="王权伟の博客">
+<meta property="og:description" content="什么是UIDebuggingInformationOverlayUIDebuggingInformationOverlay是由苹果创建的私有子类，大概是帮助开发人员和设计师调试苹果自己的iOS应用程序。
+启用后，窗口会浮动在应用的内容上，如下所示">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1488825-279074db866c0051.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1210359-9823a941c7bc9c33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1210359-bc74b8cfbf8086e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1210359-7bb08a7735cde2b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1210359-0b736ab1044c5eeb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1210359-eda3e4204238ee3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1210359-ad07ed6f80fb69a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1210359-6eb68cbc90b1abac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1210359-1a1439d885a31255.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320">
+<meta property="og:updated_time" content="2017-07-11T12:56:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开启iOS自带的调试悬浮窗UIDebuggingInformationOverlay">
+<meta name="twitter:description" content="什么是UIDebuggingInformationOverlayUIDebuggingInformationOverlay是由苹果创建的私有子类，大概是帮助开发人员和设计师调试苹果自己的iOS应用程序。
+启用后，窗口会浮动在应用的内容上，如下所示">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1488825-279074db866c0051.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.wangquanwei.com/2017-06-03-1.html"/>
+
+
+
+
+
+  <title>开启iOS自带的调试悬浮窗UIDebuggingInformationOverlay | 王权伟の博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5a6672e8545f0d238d33c35a4f4f89f5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王权伟の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">好记性不如烂笔头</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.wangquanwei.com/2017-06-03-1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王权伟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王权伟の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">开启iOS自带的调试悬浮窗UIDebuggingInformationOverlay</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T10:24:21+08:00">
+                2017-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017-06-03-1.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017-06-03-1.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是UIDebuggingInformationOverlay"><a href="#什么是UIDebuggingInformationOverlay" class="headerlink" title="什么是UIDebuggingInformationOverlay"></a>什么是UIDebuggingInformationOverlay</h1><p>UIDebuggingInformationOverlay是由苹果创建的私有子类，大概是帮助开发人员和设计师调试苹果自己的iOS应用程序。</p>
+<p>启用后，窗口会浮动在应用的内容上，如下所示</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1488825-279074db866c0051.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<a id="more"></a>
+<h1 id="如何开启UIDebuggingInformationOverlay"><a href="#如何开启UIDebuggingInformationOverlay" class="headerlink" title="如何开启UIDebuggingInformationOverlay"></a>如何开启UIDebuggingInformationOverlay</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions&#123;</div><div class="line">    // Override point for customization after application launch.</div><div class="line"></div><div class="line">    Class overlayClass = NSClassFromString(@&quot;UIDebuggingInformationOverlay&quot;);</div><div class="line">    [[overlayClass class] performSelector:@selector(prepareDebuggingOverlay)];</div><div class="line"></div><div class="line">    return YES;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>开启后使用两根手指点击状态栏来调出调试面板。<br>PS:该类是私有类，因此可能将无法通过App Store审核。</p>
+<h1 id="UIDebuggingInformationOverlay可以做什么"><a href="#UIDebuggingInformationOverlay可以做什么" class="headerlink" title="UIDebuggingInformationOverlay可以做什么"></a>UIDebuggingInformationOverlay可以做什么</h1><p>从屏幕截图可以看出，覆盖层提供了六个功能。本文将对前五个进行介绍。</p>
+<h2 id="一、View-Hierarchy"><a href="#一、View-Hierarchy" class="headerlink" title="一、View Hierarchy"></a>一、View Hierarchy</h2><p>这个选项可以向你展示当前选择的窗口的视图列表。可通过点击cell右侧的感叹号查看详情。包括视图的frame和成员变量等。<br><img src="http://upload-images.jianshu.io/upload_images/1210359-9823a941c7bc9c33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="image"><br><img src="http://upload-images.jianshu.io/upload_images/1210359-bc74b8cfbf8086e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="image"></p>
+<h2 id="二、VC-Hierarchy"><a href="#二、VC-Hierarchy" class="headerlink" title="二、VC Hierarchy"></a>二、VC Hierarchy</h2><p>通过这个可以大致看到ViewController层次结构。它与“View Hierarchy”非常相似，只是它显示了活动视图控制器的层次结构。从这里，你可以检查任何视图控制器的详情，包括其视图。<br><img src="http://upload-images.jianshu.io/upload_images/1210359-7bb08a7735cde2b9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="image"></p>
+<h2 id="三、Ivar-Explorer"><a href="#三、Ivar-Explorer" class="headerlink" title="三、Ivar Explorer"></a>三、Ivar Explorer</h2><p>这个特性允许你查看UIApplication对象的成员变量。更重要的是，任何一个对象的变量都是可以被查看的。<br>这包括app delegate，根据你的应用程序的结构，可能会提供一个很好的切入点，允许你进入自定义的对象里。<br><img src="http://upload-images.jianshu.io/upload_images/1210359-0b736ab1044c5eeb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="image"></p>
+<h2 id="四、Measure"><a href="#四、Measure" class="headerlink" title="四、Measure"></a>四、Measure</h2><p>在我看来，这是一个比较酷的特性。它允许你以pt这个精度去测量屏幕内各个元素的尺寸。首先，选择你想查看水平还是竖直的轴线。然后手指拖动屏幕，使用控制台内的放大器来帮助你。有两种模式:</p>
+<p>默认的模式忽略了视图边界。据我所知,这种模式将屏幕作为一个点阵图片,并通过颜色的变化作为潜在的测量边界。例如,在下面的屏幕截图中,我能够测量一个textfield的文字的边界和屏幕边界的距离:<br><img src="http://upload-images.jianshu.io/upload_images/1210359-eda3e4204238ee3f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="image"></p>
+<p>“View Mode”则是另外一种处理方式。它清晰的展示了每一个子视图的尺寸。拖动你的手指到要查看的视图上，可以查看它在你选择的轴线上的范围。在下面的屏幕截图里，我测量了顶部输入框的高度。<br><img src="http://upload-images.jianshu.io/upload_images/1210359-ad07ed6f80fb69a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="image"></p>
+<h2 id="五、Spec-Compare"><a href="#五、Spec-Compare" class="headerlink" title="五、Spec Compare"></a>五、Spec Compare</h2><p>我认为这个工具在开发者与设计师之间提供了极大的便利。添加一个屏幕截图到你的设备里然后通过Spec Compare选择它，被选择的这张屏幕截图会展示在当前app的顶部。你可以在屏幕上拖动来调整透明度，以此来对比设计和你app中的实现具体的不同。</p>
+<p>PS：iOS10系统记得添加相册访问权限NSPhotoLibraryUsageDescription，否则将会crash。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1210359-6eb68cbc90b1abac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="image"><br><img src="http://upload-images.jianshu.io/upload_images/1210359-1a1439d885a31255.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/320" alt="image"></p>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p><a href="https://github.com/quanweiwang/QWDebuggingInformationOverlay" target="_blank" rel="external">QWDebuggingInformationOverlay</a></p>
+<p>本文是基于下述原文进行了机器翻译并有增改，侵删！</p>
+<p>原文：<a href="http://ryanipete.com/blog/ios/swift/objective-c/uidebugginginformationoverlay/" target="_blank" rel="external">http://ryanipete.com/blog/ios/swift/objective-c/uidebugginginformationoverlay/</a></p>
+<p>图片素材来自<br>简书：<a href="http://www.jianshu.com/u/abdec57edfa1" target="_blank" rel="external">郭大猿</a> 的 <a href="http://www.jianshu.com/p/0efafc9cdd7f" target="_blank" rel="external">http://www.jianshu.com/p/0efafc9cdd7f</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixin.jpg" alt="王权伟 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/zhifubao.jpg" alt="王权伟 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017-04-27-1.html" rel="next" title="iOS 同一应用设置不同图标和名称">
+                <i class="fa fa-chevron-left"></i> iOS 同一应用设置不同图标和名称
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017-06-10-1.html" rel="prev" title="mac 安装 protocol buffer（2.6.1版） 教程">
+                mac 安装 protocol buffer（2.6.1版） 教程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="王权伟" />
+          <p class="site-author-name" itemprop="name">王权伟</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/quanweiwang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://xnxy.github.io/" title="拿根针尖对麦芒" target="_blank">拿根针尖对麦芒</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.wangyangde.cn/" title="web前端开发" target="_blank">web前端开发</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://guyueyang.github.io/" title="杨晓平の博客" target="_blank">杨晓平の博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是UIDebuggingInformationOverlay"><span class="nav-number">1.</span> <span class="nav-text">什么是UIDebuggingInformationOverlay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何开启UIDebuggingInformationOverlay"><span class="nav-number">2.</span> <span class="nav-text">如何开启UIDebuggingInformationOverlay</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UIDebuggingInformationOverlay可以做什么"><span class="nav-number">3.</span> <span class="nav-text">UIDebuggingInformationOverlay可以做什么</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、View-Hierarchy"><span class="nav-number">3.1.</span> <span class="nav-text">一、View Hierarchy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、VC-Hierarchy"><span class="nav-number">3.2.</span> <span class="nav-text">二、VC Hierarchy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Ivar-Explorer"><span class="nav-number">3.3.</span> <span class="nav-text">三、Ivar Explorer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Measure"><span class="nav-number">3.4.</span> <span class="nav-text">四、Measure</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、Spec-Compare"><span class="nav-number">3.5.</span> <span class="nav-text">五、Spec Compare</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">4.</span> <span class="nav-text">Demo</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heartƒ√"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王权伟</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wangquanwei.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.wangquanwei.com/2017-06-03-1.html';
+          this.page.identifier = '2017-06-03-1.html';
+          this.page.title = '开启iOS自带的调试悬浮窗UIDebuggingInformationOverlay';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wangquanwei.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

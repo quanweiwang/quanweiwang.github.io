@@ -1,0 +1,966 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="CnfyuWLAJaBycXiHVHkCfGLzqW5JiUIMAZGBbRd8iRs" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="7RkZahD6PE" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, iOS开发, iOS, 个人博客" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="王权伟の博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Overview
+extension是iOS8新开放的一种对几个固定系统区域的扩展机制，它可以在一定程度上弥补iOS的沙盒机制对应用间通信的限制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS Share Extensions开发教程">
+<meta property="og:url" content="http://www.wangquanwei.com/2018-03-31-1.html">
+<meta property="og:site_name" content="王权伟の博客">
+<meta property="og:description" content="Overview
+extension是iOS8新开放的一种对几个固定系统区域的扩展机制，它可以在一定程度上弥补iOS的沙盒机制对应用间通信的限制。">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/2018060110133445277.jpg">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/F97F9BEA-207F-4F17-90EF-60D763F5DE1E.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/AFDAC595-3F55-440F-AD91-8D47D08F3C3A.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/93644182-2326-4754-8DF4-80B52777FF24.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/1BEA5E6D-6307-4CC2-929E-18E32D4F2CBC.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/62E81076-F30C-4F4A-AE2E-7E034654433B.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/D04479FE3618CC43E5918D67A08375DE.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/69C012F4DC8FB1C32E89F70B9E1ED4D6.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/14594842-3F45-4CD6-A90A-E9F25DC046DE.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/A8D93D54-B746-45E2-AB49-57A8204E2595.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/4446854F-FC9C-42CB-A9B5-E2EEBB7E9FCE.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/5D8B4E2D-DFD8-4851-86AC-7CA436B6027F.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/2033F15A-3172-42C7-A8A4-07BC84A99E7E.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/21CEE27F-0AC7-4F61-8C93-5C9353A3B59B.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/D4CA10C4-F07D-4BB5-946B-C4AC33E91FF4.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/A7F23627-08FD-41C1-8E06-5B1332A2DEB5.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/B17CE0C8-1F03-4973-B39E-74422D0360BC.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/A8212F64-4CC0-4A70-B9DF-260BBA19988B.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/5348B5B7-7063-4245-88DE-F9A12E49368D.png">
+<meta property="og:updated_time" content="2018-06-23T01:16:41.079Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS Share Extensions开发教程">
+<meta name="twitter:description" content="Overview
+extension是iOS8新开放的一种对几个固定系统区域的扩展机制，它可以在一定程度上弥补iOS的沙盒机制对应用间通信的限制。">
+<meta name="twitter:image" content="http://ojgg6fpio.bkt.clouddn.com/2018060110133445277.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"right","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.wangquanwei.com/2018-03-31-1.html"/>
+
+
+
+
+
+  <title>iOS Share Extensions开发教程 | 王权伟の博客</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?5a6672e8545f0d238d33c35a4f4f89f5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">王权伟の博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">好记性不如烂笔头</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.wangquanwei.com/2018-03-31-1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王权伟">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="王权伟の博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">iOS Share Extensions开发教程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-31T10:55:08+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018-03-31-1.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018-03-31-1.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/2018060110133445277.jpg" alt="image"><br><br></div>
+
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><blockquote>
+<p>extension是iOS8新开放的一种对几个固定系统区域的扩展机制，它可以在一定程度上弥补iOS的沙盒机制对应用间通信的限制。  </p>
+</blockquote>
+<a id="more"></a>
+<h1 id="app-extensions使用限制"><a href="#app-extensions使用限制" class="headerlink" title="app extensions使用限制"></a>app extensions使用限制</h1><p>一个app extension不能有以下情况：</p>
+<p>1.访问sharedApplication对象</p>
+<p>2.使用任何标记NS_EXTENSION_UNAVAILABLE宏的API，或者类似的宏，或者不可用framework里面的API，例如HealthKit framework不能用于app extensions</p>
+<p>3.iOS设备访问相机或者麦克风（iMessage app可以访问这些资源，只要在Info.plist里面进行配置使用描述即可）</p>
+<p>4.运行一个长时间的后台任务（根据不同平台而异）</p>
+<p>5.使用AirDrop接收数据</p>
+<h1 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h1><p>注：share extensions不能单独存在，必须依赖于主体工程。因此在此之前需要先创建个项目，如何创建项目这里不再叙述。</p>
+<h3 id="创建share-extensions"><a href="#创建share-extensions" class="headerlink" title="创建share extensions"></a>创建share extensions</h3><p>File-&gt;New-&gt;Targets-&gt;Share Extension<br><img src="http://ojgg6fpio.bkt.clouddn.com/F97F9BEA-207F-4F17-90EF-60D763F5DE1E.png" alt="image"></p>
+<p><img src="http://ojgg6fpio.bkt.clouddn.com/AFDAC595-3F55-440F-AD91-8D47D08F3C3A.png" alt="image"></p>
+<p><img src="http://ojgg6fpio.bkt.clouddn.com/93644182-2326-4754-8DF4-80B52777FF24.png" alt="image"></p>
+<p><img src="http://ojgg6fpio.bkt.clouddn.com/1BEA5E6D-6307-4CC2-929E-18E32D4F2CBC.png" alt="image"></p>
+<h1 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h1><p>现在我们可以运行项目看看效果了。iOS给我们提供了一个默认的UI样式，我们可以根据实际需求自定义UI和功能。<br><img src="http://ojgg6fpio.bkt.clouddn.com/62E81076-F30C-4F4A-AE2E-7E034654433B.png" alt="image">  </p>
+<p>这里以简书为例<br>简书-&gt;任意文章打开-&gt;分享-&gt;更多  </p>
+<p>信息那一栏滑动就可以看到我们建的share extension了<br><img src="http://ojgg6fpio.bkt.clouddn.com/D04479FE3618CC43E5918D67A08375DE.png" alt="image"></p>
+<p>点击我们创建的share extension 这就是默认效果<br><img src="http://ojgg6fpio.bkt.clouddn.com/69C012F4DC8FB1C32E89F70B9E1ED4D6.png" alt="image"></p>
+<h1 id="配置-share-extension-info-plist"><a href="#配置-share-extension-info-plist" class="headerlink" title="配置 share extension info.plist"></a>配置 share extension info.plist</h1><blockquote>
+<p>Bundle display name</p>
+<p>扩展的显示名称，默认跟你的项目名称相同，可以通过修改此字段来控制扩展的显示名称。</p>
+<p>NSExtension</p>
+<p>扩展描述字段，用于描述扩展的属性、设置等。作为一个扩展项目必须要包含此字段。</p>
+<p>NSExtensionAttributes</p>
+<p>扩展属性集合字段。用于描述扩展的属性。</p>
+<p>NSExtensionActivationRule</p>
+<p>激活扩展的规则。默认为字符串“TRUEPREDICATE”，表示在分享菜单中一直显示该扩展。可以将类型改为Dictionary类型，然后添加以下字段：</p>
+<p>NSExtensionActivationSupportsAttachmentsWithMaxCount</p>
+<p>NSExtensionActivationSupportsAttachmentsWithMinCount</p>
+<p>NSExtensionActivationSupportsImageWithMaxCount</p>
+<p>NSExtensionActivationSupportsMovieWithMaxCount</p>
+<p>NSExtensionActivationSupportsWebPageWithMaxCount</p>
+<p>NSExtensionActivationSupportsWebURLWithMaxCount</p>
+<p>NSExtensionMainStoryboard</p>
+<p>设置主界面的Storyboard，如果不想使用storyboard，也可以使用NSExtensionPrincipalClass指定自定义UIViewController子类名</p>
+<p>NSExtensionPointIdentifier</p>
+<p>扩展标识，在分享扩展中为：com.Apple.share-services</p>
+<p>NSExtensionPrincipalClass</p>
+<p>自定义UI的类名</p>
+<p>NSExtensionActivationSupportsAttachmentsWithMaxCount</p>
+<p>附件最多限制，为数值类型。附件包括File、Image和Movie三大类，单一、混选总量不超过指定数量</p>
+<p>NSExtensionActivationSupportsAttachmentsWithMinCount</p>
+<p>附件最少限制，为数值类型。当设置NSExtensionActivationSupportsAttachmentsWithMaxCount时生效，默认至少选择1个附件，分享菜单中才显示扩展插件图标。</p>
+<p>NSExtensionActivationSupportsFileWithMaxCount</p>
+<p>文件最多限制，为数值类型。文件泛指除Image/Movie之外的附件，例如【邮件】附件、【语音备忘录】等。</p>
+<p>单一、混选均不超过指定数量。</p>
+<p> NSExtensionActivationSupportsImageWithMaxCount</p>
+<p>图片最多限制，为数值类型。单一、混选均不超过指定数量。</p>
+<p>NSExtensionActivationSupportsMovieWithMaxCount</p>
+<p>视频最多限制，为数值类型。单一、混选均不超过指定数量。</p>
+<p>NSExtensionActivationSupportsText</p>
+<p>是否支持文本类型，布尔类型，默认不支持。如【备忘录】的分享</p>
+<p>NSExtensionActivationSupportsWebURLWithMaxCount</p>
+<p>Web链接最多限制，为数值类型。默认不支持分享超链接，需要自己设置一个数值。</p>
+<p>NSExtensionActivationSupportsWebPageWithMaxCount</p>
+<p>Web页面最多限制，为数值类型。默认不支持Web页面分享，需要自己设置一个数值。</p>
+</blockquote>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><h4 id="1、使用storyboard创建UI"><a href="#1、使用storyboard创建UI" class="headerlink" title="1、使用storyboard创建UI"></a>1、使用storyboard创建UI</h4><p>找到share extension的info.plist-&gt;展开NSExtension-&gt;新增key NSExtensionMainStoryboard value MainInterface(即storyboard名称)<br>如果没有修改，键值默认就存在<br><img src="http://ojgg6fpio.bkt.clouddn.com/14594842-3F45-4CD6-A90A-E9F25DC046DE.png" alt="image"></p>
+<h4 id="2、使用代码创建界面"><a href="#2、使用代码创建界面" class="headerlink" title="2、使用代码创建界面"></a>2、使用代码创建界面</h4><p>找到share extension的info.plist-&gt;展开NSExtension-&gt;将NSExtensionMainStoryboard这行删掉  </p>
+<p>在NSExtension里新增key:NSExtensionPrincipalClass value: 自定义ViewController类名<br><img src="http://ojgg6fpio.bkt.clouddn.com/A8D93D54-B746-45E2-AB49-57A8204E2595.png" alt="image"></p>
+<h1 id="自定义UI、自定义功能"><a href="#自定义UI、自定义功能" class="headerlink" title="自定义UI、自定义功能"></a>自定义UI、自定义功能</h1><p>创建完share extension时会默认创建一个ShareViewController的类，它继承于SLComposeServiceViewController</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line">#import &lt;Social/Social.h&gt;</div><div class="line"></div><div class="line">@interface ShareViewController : SLComposeServiceViewController</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>我们在做自定义时可以把他删掉自己重新建个类或者直接拿默认的修改，这里仅拿默认的修改。  </p>
+<p>将ShareViewController的继承改成UIViewController,因为我们需要自定义UI，使用SLComposeServiceViewController无法显示自定义UI。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#import &lt;UIKit/UIKit.h&gt;</div><div class="line">#import &lt;Social/Social.h&gt;</div><div class="line"></div><div class="line">@interface ShareViewController : UIViewController</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>获取别的app传过来的数据 NSExtensionContext是UIViewController里的属性，可以直接使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// Returns the extension context. Also acts as a convenience method for a view controller to check if it participating in an extension request.</div><div class="line">@property (nullable, nonatomic,readonly,strong) NSExtensionContext *extensionContext NS_AVAILABLE_IOS(8_0);</div></pre></td></tr></table></figure>
+<p>通过遍历的形式来获取我们需要的数据,这里获取URL<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">__block BOOL hasGetUrl = NO;</div><div class="line">[self.extensionContext.inputItems enumerateObjectsUsingBlock:^(NSExtensionItem *  _Nonnull extensionItem, NSUInteger idx, BOOL * _Nonnull stop) &#123;</div><div class="line">    </div><div class="line">    [extensionItem.attachments enumerateObjectsUsingBlock:^(id  _Nonnull itemProvider, NSUInteger idx, BOOL * _Nonnull stop) &#123;</div><div class="line">        </div><div class="line">        if ([itemProvider hasItemConformingToTypeIdentifier:@&quot;public.url&quot;])</div><div class="line">        &#123;</div><div class="line">            [itemProvider loadItemForTypeIdentifier:@&quot;public.url&quot; options:nil completionHandler:^(id&lt;NSSecureCoding&gt;  _Nullable item, NSError * _Null_unspecified error) &#123;</div><div class="line">                </div><div class="line">                if ([(NSObject *)item isKindOfClass:[NSURL class]])</div><div class="line">                &#123;</div><div class="line">                    NSURL * url = (NSURL *)item;</div><div class="line">                    dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                        </div><div class="line">                        NSURLRequest * request = [NSURLRequest requestWithURL:url];</div><div class="line">                        [self.webView loadRequest:request];</div><div class="line">                    &#125;);</div><div class="line">                &#125;</div><div class="line">                </div><div class="line">            &#125;];</div><div class="line">            </div><div class="line">            hasGetUrl = YES;</div><div class="line">            *stop = YES;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        *stop = hasGetUrl;</div><div class="line">        </div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">&#125;];</div></pre></td></tr></table></figure></p>
+<p>退出share extension<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">NSError * error = [NSError errorWithDomain:@&quot;GankIOExtension&quot; code:NSUserCancelledError userInfo:nil];</div><div class="line">[self.extensionContext cancelRequestWithError:error];</div></pre></td></tr></table></figure></p>
+<p>如果存在网络请求，且非https，请在info.plist里添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</div><div class="line">&lt;dict&gt;</div><div class="line">	&lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;</div><div class="line">	&lt;true/&gt;</div><div class="line">&lt;/dict&gt;</div></pre></td></tr></table></figure>
+<h4 id="剩下的该怎么玩就怎么玩，和正常的创建页面，处理逻辑一样"><a href="#剩下的该怎么玩就怎么玩，和正常的创建页面，处理逻辑一样" class="headerlink" title="剩下的该怎么玩就怎么玩，和正常的创建页面，处理逻辑一样"></a>剩下的该怎么玩就怎么玩，和正常的创建页面，处理逻辑一样</h4><h1 id="使用cocoapods"><a href="#使用cocoapods" class="headerlink" title="使用cocoapods"></a>使用cocoapods</h1><p>正常情况下我们是无法在Share extension里使用cocoapods的库的，所以我们需要配置一下。这样就可以在extension里使用cocoapods的库啦<br><img src="http://ojgg6fpio.bkt.clouddn.com/4446854F-FC9C-42CB-A9B5-E2EEBB7E9FCE.png" alt="image"></p>
+<h1 id="代码共享"><a href="#代码共享" class="headerlink" title="代码共享"></a>代码共享</h1><p>有时候我们想使用主体项目里的一些封装好的方法，例如category之类的，但是不能使用。  </p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>1、拷贝一份代码到share extension（太sb）<br>2、使用framework来共享代码（推荐）</p>
+<p>这里使用方法2来实现代码共享，具体如下：  </p>
+<h4 id="1、创建framework"><a href="#1、创建framework" class="headerlink" title="1、创建framework"></a>1、创建framework</h4><p>File-&gt;New-&gt;Targets-Cocoa Touch Framework<br><img src="http://ojgg6fpio.bkt.clouddn.com/5D8B4E2D-DFD8-4851-86AC-7CA436B6027F.png" alt="image"></p>
+<h4 id="2、添加类到framework"><a href="#2、添加类到framework" class="headerlink" title="2、添加类到framework"></a>2、添加类到framework</h4><p>我们选择需要共享的类，将其添加到framework里  </p>
+<p>选中.h文件<br><img src="http://ojgg6fpio.bkt.clouddn.com/2033F15A-3172-42C7-A8A4-07BC84A99E7E.png" alt="image"></p>
+<p>选中.m文件<br><img src="http://ojgg6fpio.bkt.clouddn.com/21CEE27F-0AC7-4F61-8C93-5C9353A3B59B.png" alt="image"></p>
+<p>找到framework文件夹里的.h文件，将共享的类的头文件添加进去<br><img src="http://ojgg6fpio.bkt.clouddn.com/D4CA10C4-F07D-4BB5-946B-C4AC33E91FF4.png" alt="image"></p>
+<p>公开头文件<br><img src="http://ojgg6fpio.bkt.clouddn.com/A7F23627-08FD-41C1-8E06-5B1332A2DEB5.png" alt="image"></p>
+<h3 id="最最最重要一步"><a href="#最最最重要一步" class="headerlink" title="最最最重要一步"></a>最最最重要一步</h3><p>将framework添加到share extension里<br><img src="http://ojgg6fpio.bkt.clouddn.com/B17CE0C8-1F03-4973-B39E-74422D0360BC.png" alt="image"></p>
+<h3 id="请遵守app-extensions使用限制"><a href="#请遵守app-extensions使用限制" class="headerlink" title="请遵守app extensions使用限制"></a>请遵守app extensions使用限制</h3><h1 id="发布（此处有坑）"><a href="#发布（此处有坑）" class="headerlink" title="发布（此处有坑）"></a>发布（此处有坑）</h1><p><img src="http://ojgg6fpio.bkt.clouddn.com/A8212F64-4CC0-4A70-B9DF-260BBA19988B.png" alt="image"></p>
+<h3 id="1、ERROR-ITMS-90362-“Invalid-Info-plist-value-The-value-for-the-key-‘NSExtensionActivationRule’-in-bundle-xxxxx-is-invalid-Please-refer-to-the-App-Extension-Programming-Guide-on-https-developer-apple-com“"><a href="#1、ERROR-ITMS-90362-“Invalid-Info-plist-value-The-value-for-the-key-‘NSExtensionActivationRule’-in-bundle-xxxxx-is-invalid-Please-refer-to-the-App-Extension-Programming-Guide-on-https-developer-apple-com“" class="headerlink" title="1、ERROR ITMS-90362: “Invalid Info.plist value. The value for the key ‘NSExtensionActivationRule’ in bundle      xxxxx is invalid. Please refer to the App Extension Programming Guide on https://developer.apple.com“"></a>1、ERROR ITMS-90362: “Invalid Info.plist value. The value for the key ‘NSExtensionActivationRule’ in bundle      xxxxx is invalid. Please refer to the App Extension Programming Guide on <a href="https://developer.apple.com" target="_blank" rel="external">https://developer.apple.com</a>“</h3><p>NSExtensionAttributes的默认值是“TRUEPREDICATE”这是供给我们开发时使用的。我们发布时需要对该字段进行修改。</p>
+<p><img src="http://ojgg6fpio.bkt.clouddn.com/5348B5B7-7063-4245-88DE-F9A12E49368D.png" alt="image"></p>
+<p>例如，要声明您的共享扩展可以支持多达十个图像，一个电影和一个网页URL，您可以使用以下字典来获取该NSExtensionAttributes键的值：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;NSExtensionAttributes&lt;/key&gt;</div><div class="line">&lt;dict&gt;</div><div class="line">    &lt;key&gt;NSExtensionActivationRule&lt;/key&gt;</div><div class="line">    &lt;dict&gt;</div><div class="line">        &lt;key&gt;NSExtensionActivationSupportsImageWithMaxCount&lt;/key&gt;</div><div class="line">        &lt;integer&gt;10&lt;/integer&gt;</div><div class="line">        &lt;key&gt;NSExtensionActivationSupportsMovieWithMaxCount&lt;/key&gt;</div><div class="line">        &lt;integer&gt;1&lt;/integer&gt;</div><div class="line">        &lt;key&gt;NSExtensionActivationSupportsWebURLWithMaxCount&lt;/key&gt;</div><div class="line">        &lt;integer&gt;1&lt;/integer&gt;</div><div class="line">    &lt;/dict&gt;</div><div class="line">&lt;/dict&gt;</div></pre></td></tr></table></figure></p>
+<p>如果您不支持特定的数据类型，请使用0相应密钥的值或从NSExtensionActivationRule字典中删除密钥。</p>
+<h3 id="2、WARNING-ITMS-90473-“CFBundleShortVersionString-Mismatch-The-CFBundleShortVersionString-value-‘1-0’-of-extension-xxxxx-does-not-match-the-CFBundleShortVersionString-value-‘1-1-3’-of-its-containing-iOS-application-‘Gank-io-app’-”"><a href="#2、WARNING-ITMS-90473-“CFBundleShortVersionString-Mismatch-The-CFBundleShortVersionString-value-‘1-0’-of-extension-xxxxx-does-not-match-the-CFBundleShortVersionString-value-‘1-1-3’-of-its-containing-iOS-application-‘Gank-io-app’-”" class="headerlink" title="2、WARNING ITMS-90473: “CFBundleShortVersionString Mismatch. The CFBundleShortVersionString value ‘1.0’ of extension xxxxx does not match the CFBundleShortVersionString value ‘1.1.3’ of its containing iOS application ‘Gank.io.app’.”"></a>2、WARNING ITMS-90473: “CFBundleShortVersionString Mismatch. The CFBundleShortVersionString value ‘1.0’ of extension xxxxx does not match the CFBundleShortVersionString value ‘1.1.3’ of its containing iOS application ‘Gank.io.app’.”</h3><p>这里要求extension的Version和Build版本号要与主体工程的版本号一致</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://developer.apple.com/library/content/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW8" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/General/Conceptual/ExtensibilityPG/ExtensionScenarios.html#//apple_ref/doc/uid/TP40014214-CH21-SW8</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weixin.jpg" alt="王权伟 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/zhifubao.jpg" alt="王权伟 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018-03-13-1.html" rel="next" title="今日干货--干货集中营iOS客户端现已加入App Store豪华午餐">
+                <i class="fa fa-chevron-left"></i> 今日干货--干货集中营iOS客户端现已加入App Store豪华午餐
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018-06-11-1.html" rel="prev" title="UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法">
+                UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="王权伟" />
+          <p class="site-author-name" itemprop="name">王权伟</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/quanweiwang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://xnxy.github.io/" title="拿根针尖对麦芒" target="_blank">拿根针尖对麦芒</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://blog.wangyangde.cn/" title="web前端开发" target="_blank">web前端开发</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://guyueyang.github.io/" title="杨晓平の博客" target="_blank">杨晓平の博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#app-extensions使用限制"><span class="nav-number">2.</span> <span class="nav-text">app extensions使用限制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建项目"><span class="nav-number">3.</span> <span class="nav-text">创建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建share-extensions"><span class="nav-number">3.0.1.</span> <span class="nav-text">创建share extensions</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行项目"><span class="nav-number">4.</span> <span class="nav-text">运行项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置-share-extension-info-plist"><span class="nav-number">5.</span> <span class="nav-text">配置 share extension info.plist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项"><span class="nav-number">5.0.1.</span> <span class="nav-text">注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、使用storyboard创建UI"><span class="nav-number">5.0.1.1.</span> <span class="nav-text">1、使用storyboard创建UI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、使用代码创建界面"><span class="nav-number">5.0.1.2.</span> <span class="nav-text">2、使用代码创建界面</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义UI、自定义功能"><span class="nav-number">6.</span> <span class="nav-text">自定义UI、自定义功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#剩下的该怎么玩就怎么玩，和正常的创建页面，处理逻辑一样"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">剩下的该怎么玩就怎么玩，和正常的创建页面，处理逻辑一样</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用cocoapods"><span class="nav-number">7.</span> <span class="nav-text">使用cocoapods</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码共享"><span class="nav-number">8.</span> <span class="nav-text">代码共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法"><span class="nav-number">8.0.1.</span> <span class="nav-text">解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、创建framework"><span class="nav-number">8.0.1.1.</span> <span class="nav-text">1、创建framework</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、添加类到framework"><span class="nav-number">8.0.1.2.</span> <span class="nav-text">2、添加类到framework</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最最最重要一步"><span class="nav-number">8.0.2.</span> <span class="nav-text">最最最重要一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请遵守app-extensions使用限制"><span class="nav-number">8.0.3.</span> <span class="nav-text">请遵守app extensions使用限制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发布（此处有坑）"><span class="nav-number">9.</span> <span class="nav-text">发布（此处有坑）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、ERROR-ITMS-90362-“Invalid-Info-plist-value-The-value-for-the-key-‘NSExtensionActivationRule’-in-bundle-xxxxx-is-invalid-Please-refer-to-the-App-Extension-Programming-Guide-on-https-developer-apple-com“"><span class="nav-number">9.0.1.</span> <span class="nav-text">1、ERROR ITMS-90362: “Invalid Info.plist value. The value for the key ‘NSExtensionActivationRule’ in bundle      xxxxx is invalid. Please refer to the App Extension Programming Guide on https://developer.apple.com“</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、WARNING-ITMS-90473-“CFBundleShortVersionString-Mismatch-The-CFBundleShortVersionString-value-‘1-0’-of-extension-xxxxx-does-not-match-the-CFBundleShortVersionString-value-‘1-1-3’-of-its-containing-iOS-application-‘Gank-io-app’-”"><span class="nav-number">9.0.2.</span> <span class="nav-text">2、WARNING ITMS-90473: “CFBundleShortVersionString Mismatch. The CFBundleShortVersionString value ‘1.0’ of extension xxxxx does not match the CFBundleShortVersionString value ‘1.1.3’ of its containing iOS application ‘Gank.io.app’.”</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">10.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heartƒ√"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王权伟</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv">
+      本站总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://wangquanwei.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://www.wangquanwei.com/2018-03-31-1.html';
+          this.page.identifier = '2018-03-31-1.html';
+          this.page.title = 'iOS Share Extensions开发教程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://wangquanwei.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
