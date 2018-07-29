@@ -5,10 +5,10 @@
     
   <url>
     <loc>http://www.wangquanwei.com/2018-07-28-1.html</loc>
-    <lastmod>2018-07-28T13:18:46.747Z</lastmod>
+    <lastmod>2018-07-29T11:02:27.329Z</lastmod>
     <data>
         <display>
-        <title>最新版本mac系统怎么让终端也走ss的代理</title>
+        <title>让mac系统终端支持ss的代理</title>
         <pubTime>2018-07-28T13:18:08.000Z</pubTime>
         
          
@@ -40,12 +40,12 @@
 
     
   <url>
-    <loc>http://www.wangquanwei.com/2018-06-11-1.html</loc>
+    <loc>http://www.wangquanwei.com/2018-06-25-1.html</loc>
     <lastmod>2018-07-26T14:00:49.377Z</lastmod>
     <data>
         <display>
-        <title>UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法</title>
-        <pubTime>2018-06-11T03:37:08.000Z</pubTime>
+        <title>Cannot modify constraints for UITabBar managed by a controller</title>
+        <pubTime>2018-06-25T04:43:08.000Z</pubTime>
         
          
            
@@ -58,12 +58,12 @@
 
     
   <url>
-    <loc>http://www.wangquanwei.com/2018-06-25-1.html</loc>
+    <loc>http://www.wangquanwei.com/2018-06-11-1.html</loc>
     <lastmod>2018-07-26T14:00:49.377Z</lastmod>
     <data>
         <display>
-        <title>Cannot modify constraints for UITabBar managed by a controller</title>
-        <pubTime>2018-06-25T04:43:08.000Z</pubTime>
+        <title>UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法</title>
+        <pubTime>2018-06-11T03:37:08.000Z</pubTime>
         
          
            

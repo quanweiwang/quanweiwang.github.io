@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wangquanwei.com/"/>
-  <updated>2018-07-28T13:18:46.747Z</updated>
+  <updated>2018-07-29T11:02:27.329Z</updated>
   <id>http://www.wangquanwei.com/</id>
   
   <author>
@@ -16,15 +16,15 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>最新版本mac系统怎么让终端也走ss的代理</title>
+    <title>让mac系统终端支持ss的代理</title>
     <link href="http://www.wangquanwei.com/2018-07-28-1.html"/>
     <id>http://www.wangquanwei.com/2018-07-28-1.html</id>
     <published>2018-07-28T13:18:08.000Z</published>
-    <updated>2018-07-28T13:18:46.747Z</updated>
+    <updated>2018-07-29T11:02:27.329Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="缘由"><a href="#缘由" class="headerlink" title="缘由"></a>缘由</h1><p>时间: 2018.07.28<br>地点: 电脑前<br>事件: 提交个人博客到github失败(github被墙了)</p>
+    <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>近期发现github似乎被GFW给墙了，在终端向github提交博客文章一直失败，然而终端默认不支持ss代理。<br>本文将介绍mac系统下如何让终端支持ss代理。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">RPC failed; curl 55 SSL_write() returned SYSCALL, errno = 32</div></pre></td></tr></table></figure>
-<h3 id="非技术人员赶紧撤离、非技术人员赶紧撤离、非技术人员赶紧撤离。"><a href="#非技术人员赶紧撤离、非技术人员赶紧撤离、非技术人员赶紧撤离。" class="headerlink" title="非技术人员赶紧撤离、非技术人员赶紧撤离、非技术人员赶紧撤离。"></a>非技术人员赶紧撤离、非技术人员赶紧撤离、非技术人员赶紧撤离。</h3><a id="more"></a>
+<a id="more"></a>
 <h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><p>1、搭建一个ss，具体的百度、谷歌。<br>2、下载ShadowsocksX-NG，具体下载地址百度、谷歌。<br>3、运行ShadowsocksX-NG，右键点小飞机，然后有一个Copy HTTP Proxy Shell Export Line，点击之后会copy命令。</p>
 <p><img src="http://ojgg6fpio.bkt.clouddn.com/6B8B6DA9-C3E3-4BCF-986F-36B12CE02B68.png" alt="image">  </p>
 <p>4、到终端paste，回车即可。<br><img src="http://ojgg6fpio.bkt.clouddn.com/FF6D32B9-166B-4517-B6BF-B8B599AC3FDC.png" alt="image"></p>
@@ -35,9 +35,8 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;缘由&quot;&gt;&lt;a href=&quot;#缘由&quot; class=&quot;headerlink&quot; title=&quot;缘由&quot;&gt;&lt;/a&gt;缘由&lt;/h1&gt;&lt;p&gt;时间: 2018.07.28&lt;br&gt;地点: 电脑前&lt;br&gt;事件: 提交个人博客到github失败(github被墙了)&lt;/p&gt;
+      &lt;h1 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h1&gt;&lt;p&gt;近期发现github似乎被GFW给墙了，在终端向github提交博客文章一直失败，然而终端默认不支持ss代理。&lt;br&gt;本文将介绍mac系统下如何让终端支持ss代理。&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;RPC failed; curl 55 SSL_write() returned SYSCALL, errno = 32&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;h3 id=&quot;非技术人员赶紧撤离、非技术人员赶紧撤离、非技术人员赶紧撤离。&quot;&gt;&lt;a href=&quot;#非技术人员赶紧撤离、非技术人员赶紧撤离、非技术人员赶紧撤离。&quot; class=&quot;headerlink&quot; title=&quot;非技术人员赶紧撤离、非技术人员赶紧撤离、非技术人员赶紧撤离。&quot;&gt;&lt;/a&gt;非技术人员赶紧撤离、非技术人员赶紧撤离、非技术人员赶紧撤离。&lt;/h3&gt;
     
     </summary>
     
