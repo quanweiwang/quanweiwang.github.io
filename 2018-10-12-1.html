@@ -99,31 +99,37 @@
 
 
 
-<meta name="description" content="参考资料：曾静的技术博客 iOS开发之同一应用设置不同图标和名称
-我们在开发中经常会遇到一个APP存在多个渠道版本，例如：debug版、App Store提交版、test试版、299$企业版、ipad版等。他们之间可能会存在不同的名字及不同的应用图标，bundle id。
-Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 全球唯一不可重复，因此我们">
+<meta name="description" content="Overview炒下冷饭，该篇文章发表于2016-08-07，发表在博客园https://www.cnblogs.com/wangqw/p/5738777.html，现重新排版发表于此。
+友情提醒本demo仅适用于iOS8及以上系统。  
+使用autolayout+storyboard实现弹窗第一步、storyboard创建界面1、打开storyboard 拖一个UIViewcontroller出">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS 同一应用设置不同图标和名称">
-<meta property="og:url" content="http://www.wangquanwei.com/2017-04-27-1.html">
+<meta property="og:title" content="iOS 利用模态视图实现带黑色蒙版的底部弹窗">
+<meta property="og:url" content="http://www.wangquanwei.com/2018-10-12-1.html">
 <meta property="og:site_name" content="王权伟の博客">
-<meta property="og:description" content="参考资料：曾静的技术博客 iOS开发之同一应用设置不同图标和名称
-我们在开发中经常会遇到一个APP存在多个渠道版本，例如：debug版、App Store提交版、test试版、299$企业版、ipad版等。他们之间可能会存在不同的名字及不同的应用图标，bundle id。
-Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 全球唯一不可重复，因此我们">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%BA%8C.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%B8%80.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%B8%89.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E5%9B%9B.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%BA%94.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E5%85%AD.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E5%85%AB.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%B8%83.png">
-<meta property="og:updated_time" content="2017-05-21T14:03:01.000Z">
+<meta property="og:description" content="Overview炒下冷饭，该篇文章发表于2016-08-07，发表在博客园https://www.cnblogs.com/wangqw/p/5738777.html，现重新排版发表于此。
+友情提醒本demo仅适用于iOS8及以上系统。  
+使用autolayout+storyboard实现弹窗第一步、storyboard创建界面1、打开storyboard 拖一个UIViewcontroller出">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807175904825-369553193.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180343168-1347233876.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180729684-462217795.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180935434-792688910.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181130700-1845924649.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181841497-1876214160.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807190653059-1295967993.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191214481-1562655370.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191933184-189155919.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192018106-1442728786.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192726481-1498336537.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193013293-1451604844.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193422418-654040597.png">
+<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193807153-800741518.gif">
+<meta property="og:updated_time" content="2018-10-12T14:43:07.273Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 同一应用设置不同图标和名称">
-<meta name="twitter:description" content="参考资料：曾静的技术博客 iOS开发之同一应用设置不同图标和名称
-我们在开发中经常会遇到一个APP存在多个渠道版本，例如：debug版、App Store提交版、test试版、299$企业版、ipad版等。他们之间可能会存在不同的名字及不同的应用图标，bundle id。
-Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 全球唯一不可重复，因此我们">
-<meta name="twitter:image" content="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%BA%8C.png">
+<meta name="twitter:title" content="iOS 利用模态视图实现带黑色蒙版的底部弹窗">
+<meta name="twitter:description" content="Overview炒下冷饭，该篇文章发表于2016-08-07，发表在博客园https://www.cnblogs.com/wangqw/p/5738777.html，现重新排版发表于此。
+友情提醒本demo仅适用于iOS8及以上系统。  
+使用autolayout+storyboard实现弹窗第一步、storyboard创建界面1、打开storyboard 拖一个UIViewcontroller出">
+<meta name="twitter:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807175904825-369553193.png">
 
 
 
@@ -151,13 +157,13 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
 
 
 
-  <link rel="canonical" href="http://www.wangquanwei.com/2017-04-27-1.html"/>
+  <link rel="canonical" href="http://www.wangquanwei.com/2018-10-12-1.html"/>
 
 
 
 
 
-  <title>iOS 同一应用设置不同图标和名称 | 王权伟の博客</title>
+  <title>iOS 利用模态视图实现带黑色蒙版的底部弹窗 | 王权伟の博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -297,7 +303,7 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.wangquanwei.com/2017-04-27-1.html">
+    <link itemprop="mainEntityOfPage" href="http://www.wangquanwei.com/2018-10-12-1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王权伟">
@@ -314,7 +320,7 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
 
         
         
-          <h2 class="post-title" itemprop="name headline">iOS 同一应用设置不同图标和名称</h2>
+          <h2 class="post-title" itemprop="name headline">iOS 利用模态视图实现带黑色蒙版的底部弹窗</h2>
         
 
         <div class="post-meta">
@@ -326,8 +332,8 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-27T21:35:21+08:00">
-                2017-04-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-12T22:42:08+08:00">
+                2018-10-12
               </time>
             
 
@@ -367,9 +373,9 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017-04-27-1.html#comments" itemprop="discussionUrl">
+                <a href="/2018-10-12-1.html#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017-04-27-1.html" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018-10-12-1.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -399,23 +405,52 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
       
 
       
-        <p>参考资料：曾静的技术博客 <a href="http://blog.devzeng.com/blog/ios-two-version-app-setting-profile.html" target="_blank" rel="external">iOS开发之同一应用设置不同图标和名称</a></p>
-<p>我们在开发中经常会遇到一个APP存在多个渠道版本，例如：debug版、App Store提交版、test试版、299$企业版、ipad版等。他们之间可能会存在不同的名字及不同的应用图标，bundle id。</p>
-<h1 id="Bundle-id"><a href="#Bundle-id" class="headerlink" title="Bundle id"></a>Bundle id</h1><p>Bundle id 是iOS用来识别app是否相同的依据，因此Bundle id 全球唯一不可重复，因此我们需要打包多渠道版本就需要多个不同的Bundle id。<br><a id="more"></a></p>
-<h1 id="Build-Configuration"><a href="#Build-Configuration" class="headerlink" title="Build Configuration"></a>Build Configuration</h1><p>Build Configuration XCode 默认会提供两个即Debug、Release。如下图所示<br><img src="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%BA%8C.png" alt="image"></p>
-<p>然鹅！默认的并不满足我们的需求，因此我们需要手动添加一个或者多个新配置项。<br>选中PROJECT的名称，然后选中Info，点击Configurations下面的+选择Duplicate “Debug” Configuration,如下图：<br><img src="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%B8%80.png" alt="image"></p>
-<p>可根据需求选择Debug or Release，如果选择Debug会在列表出现Debug Copy的行，如果选择Release会在列表出现Release copy的行，将我们新建的改成自己想要的名字即可。如下图就是将新建的改成AppStore。<br><img src="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%B8%89.png" alt="image"></p>
-<h1 id="User-Defined-Setting"><a href="#User-Defined-Setting" class="headerlink" title="User-Defined Setting"></a>User-Defined Setting</h1><blockquote>
-<p>以下文字引用自曾静的技术博客 <a href="http://blog.devzeng.com/blog/ios-two-version-app-setting-profile.html" target="_blank" rel="external">iOS开发之同一应用设置不同图标和名称</a> 侵删</p>
-<p>在Xcode中使用User-Defined Setting可以定义一些Xcode编译使用的宏配置，为了实现不同环境下App显示的名称和图标不同，可以在User-Defined Setting中定义一些有关应用程序名称和应用图标的配置。</p>
+        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>炒下冷饭，该篇文章发表于2016-08-07，发表在博客园<a href="https://www.cnblogs.com/wangqw/p/5738777.html" target="_blank" rel="external">https://www.cnblogs.com/wangqw/p/5738777.html</a>，现重新排版发表于此。</p>
+<h1 id="友情提醒"><a href="#友情提醒" class="headerlink" title="友情提醒"></a>友情提醒</h1><p>本demo仅适用于iOS8及以上系统。  </p>
+<h1 id="使用autolayout-storyboard实现弹窗"><a href="#使用autolayout-storyboard实现弹窗" class="headerlink" title="使用autolayout+storyboard实现弹窗"></a>使用autolayout+storyboard实现弹窗</h1><h2 id="第一步、storyboard创建界面"><a href="#第一步、storyboard创建界面" class="headerlink" title="第一步、storyboard创建界面"></a>第一步、storyboard创建界面</h2><p>1、打开storyboard 拖一个UIViewcontroller出来，并与class相关联</p>
+<a id="more"></a>
+<p>2、拖出一个UIView作为弹窗视图的容器，容器里放置弹窗的内容，容器高度根据具体需求放置。容器放在最底部 </p>
+<p>3、放置一个UIButton在容器View的上方间距为0，并把UIButton设置为黑色（用于实现蒙版效果及点击空白处关闭弹窗）</p>
+<p>4、约束。底部容器打left、right、bottom、height这个约束。UIButton打 left、right、top、bottom约束 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807175904825-369553193.png" alt="image"><br>底部容器约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180343168-1347233876.png" alt="image"><br>UIButton约束<br></div>
+
+<p>5、约束。将底部容器的bottom约束编辑修改 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180729684-462217795.png" alt="image"><br>修改容器bottom约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180935434-792688910.png" alt="image"><br>修改容器bottom约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181130700-1845924649.png" alt="image"><br>修改容器bottom约束<br></div>
+
+<p>6、找到底部容器的bottom约束拉线到对应的UIViewController 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181841497-1876214160.png" alt="image"><br>拉线<br></div>
+
+<h2 id="第二步、设置蒙版及弹窗动画"><a href="#第二步、设置蒙版及弹窗动画" class="headerlink" title="第二步、设置蒙版及弹窗动画"></a>第二步、设置蒙版及弹窗动画</h2><p>1、修改UIButton的透明度并把UIViewController的View的背景色设置为透明 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807190653059-1295967993.png" alt="image"><br>设置透明度<br></div>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//千万别设置view的alpha 设置alpha 会导致view下的所有子视图都变透明</div><div class="line">self.view.backgroundColor = [UIColor clearColor];</div><div class="line"></div><div class="line">//设置按钮透明度</div><div class="line">self.dismissBtn.alpha = 0.5f;</div><div class="line">self.dismissBtn.backgroundColor = [UIColor blackColor];</div></pre></td></tr></table></figure>
+<p>2、实现弹窗动画，在viewDidAppear中实现，这样才可以看到整个动画过程 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191214481-1562655370.png" alt="image"><br>修改约束<br></div>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//视图显示完 弹出弹窗</div><div class="line">- (void)viewDidAppear:(BOOL)animated &#123;</div><div class="line">    [super viewDidAppear:animated];</div><div class="line">    </div><div class="line">    //更改视图 底部约束</div><div class="line">    self.viewBottomConstraint.constant = 0;</div><div class="line">    </div><div class="line">    //执行动画</div><div class="line">    [UIView animateWithDuration:0.25 animations:^&#123;</div><div class="line">        </div><div class="line">        //强制更新约束</div><div class="line">        [self.view layoutIfNeeded];</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3、弹出模态视图 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191933184-189155919.png" alt="image"><br>模态视图<br></div>
+
+<p>请注意看截图，该方法所在类为ViewController<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#pragma mark- 按钮点击事件</div><div class="line">- (void)popBtn:(UIButton *)btn &#123;</div><div class="line">    </div><div class="line">    UIStoryboard * sb = [UIStoryboard storyboardWithName:@&quot;Main&quot; bundle:nil];</div><div class="line">    QWPopupWindowVC * vc = [sb instantiateViewControllerWithIdentifier:@&quot;QWPopupWindowVC&quot;];</div><div class="line">    vc.providesPresentationContextTransitionStyle = YES;</div><div class="line">    vc.definesPresentationContext = YES;</div><div class="line">    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;</div><div class="line">    [self presentViewController:vc animated:NO completion:nil];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>几个属性的解释  </p>
+<blockquote>
+<p>解释内容摘至博客园 返回主页不打扰是我的温柔 <a href="http://www.cnblogs.com/SenDylan/p/3953832.html" target="_blank" rel="external">http://www.cnblogs.com/SenDylan/p/3953832.html</a>  </p>
 </blockquote>
-<p>1、开启User-Defined Setting，如下图：<br><img src="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E5%9B%9B.png" alt="image"></p>
-<p>2、添加APP_DISPLAY_NAME(APP的名称)、APP_ICON_NAME(APP图标名称)和BUNDLE_IDENTIFIER（APP Bundle ID）三个配置选项，效果如下图：<br><img src="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%BA%94.png" alt="image"></p>
-<h1 id="配置应用图标"><a href="#配置应用图标" class="headerlink" title="配置应用图标"></a>配置应用图标</h1><p>1、配置应用图标</p>
-<p>搜索Asset Catalog Compiler<br><img src="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E5%85%AD.png" alt="image"></p>
-<p>应用图标如图<br><img src="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E5%85%AB.png" alt="image"></p>
-<h1 id="配置应用名称"><a href="#配置应用名称" class="headerlink" title="配置应用名称"></a>配置应用名称</h1><p>1、配置应用名称<br><img src="http://ojgg6fpio.bkt.clouddn.com/iOS%20%E5%90%8C%E4%B8%80%E5%BA%94%E7%94%A8%E8%AE%BE%E7%BD%AE%E4%B8%8D%E5%90%8C%E5%9B%BE%E6%A0%87%E5%92%8C%E5%90%8D%E7%A7%B0%E5%9B%BE%E4%B8%83.png" alt="image"></p>
-<h1 id="Demo地址"><a href="#Demo地址" class="headerlink" title="Demo地址"></a>Demo地址</h1><p><a href="https://github.com/quanweiwang/iOS-development-set-different-icon-and-name-of-the-same-application" target="_blank" rel="external">iOS开发之同一应用设置不同图标和名称</a></p>
+<p>providesPresentationContextTransitionStyle</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192018106-1442728786.png" alt="image"><br></div>
+
+<p>definesPresentationContext</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192726481-1498336537.png" alt="image"><br></div>
+
+
+<p>modalPresentationStyle</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193013293-1451604844.png" alt="image"><br></div><br>部分类容读起来怪怪的，不清楚是不是翻译软件的原因。<br><br>4、关闭弹窗<br><div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193422418-654040597.png" alt="image"><br>关闭弹窗<br></div>
+
+<h1 id="演示gif"><a href="#演示gif" class="headerlink" title="演示gif"></a>演示gif</h1><div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193807153-800741518.gif" alt="image"><br></div>
+
+<h1 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h1><p><a href="https://github.com/quanweiwang/QWPopupWindow" target="_blank" rel="external">demo下载</a></p>
 
       
     </div>
@@ -473,8 +508,8 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017-03-14-1.html" rel="next" title="iOS 处理JSON字符串里的特殊字符">
-                <i class="fa fa-chevron-left"></i> iOS 处理JSON字符串里的特殊字符
+              <a href="/2018-09-18-1.html" rel="next" title="iOS12 Xcode10 升级后报错临时解决方案">
+                <i class="fa fa-chevron-left"></i> iOS12 Xcode10 升级后报错临时解决方案
               </a>
             
           </div>
@@ -482,10 +517,6 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017-06-03-1.html" rel="prev" title="开启iOS自带的调试悬浮窗UIDebuggingInformationOverlay">
-                开启iOS自带的调试悬浮窗UIDebuggingInformationOverlay <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -652,7 +683,7 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Bundle-id"><span class="nav-number">1.</span> <span class="nav-text">Bundle id</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Build-Configuration"><span class="nav-number">2.</span> <span class="nav-text">Build Configuration</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#User-Defined-Setting"><span class="nav-number">3.</span> <span class="nav-text">User-Defined Setting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置应用图标"><span class="nav-number">4.</span> <span class="nav-text">配置应用图标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置应用名称"><span class="nav-number">5.</span> <span class="nav-text">配置应用名称</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo地址"><span class="nav-number">6.</span> <span class="nav-text">Demo地址</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#友情提醒"><span class="nav-number">2.</span> <span class="nav-text">友情提醒</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用autolayout-storyboard实现弹窗"><span class="nav-number">3.</span> <span class="nav-text">使用autolayout+storyboard实现弹窗</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步、storyboard创建界面"><span class="nav-number">3.1.</span> <span class="nav-text">第一步、storyboard创建界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步、设置蒙版及弹窗动画"><span class="nav-number">3.2.</span> <span class="nav-text">第二步、设置蒙版及弹窗动画</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#演示gif"><span class="nav-number">4.</span> <span class="nav-text">演示gif</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#demo"><span class="nav-number">5.</span> <span class="nav-text">demo</span></a></li></ol></div>
             
 
           </div>
@@ -813,9 +844,9 @@ Bundle idBundle id 是iOS用来识别app是否相同的依据，因此Bundle id 
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.wangquanwei.com/2017-04-27-1.html';
-          this.page.identifier = '2017-04-27-1.html';
-          this.page.title = 'iOS 同一应用设置不同图标和名称';
+          this.page.url = 'http://www.wangquanwei.com/2018-10-12-1.html';
+          this.page.identifier = '2018-10-12-1.html';
+          this.page.title = 'iOS 利用模态视图实现带黑色蒙版的底部弹窗';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://wangquanwei.disqus.com/embed.js';

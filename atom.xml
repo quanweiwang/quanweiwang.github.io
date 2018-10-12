@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wangquanwei.com/"/>
-  <updated>2018-07-29T11:02:27.329Z</updated>
+  <updated>2018-10-12T14:43:07.273Z</updated>
   <id>http://www.wangquanwei.com/</id>
   
   <author>
@@ -14,6 +14,111 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>iOS 利用模态视图实现带黑色蒙版的底部弹窗</title>
+    <link href="http://www.wangquanwei.com/2018-10-12-1.html"/>
+    <id>http://www.wangquanwei.com/2018-10-12-1.html</id>
+    <published>2018-10-12T14:42:08.000Z</published>
+    <updated>2018-10-12T14:43:07.273Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>炒下冷饭，该篇文章发表于2016-08-07，发表在博客园<a href="https://www.cnblogs.com/wangqw/p/5738777.html" target="_blank" rel="external">https://www.cnblogs.com/wangqw/p/5738777.html</a>，现重新排版发表于此。</p>
+<h1 id="友情提醒"><a href="#友情提醒" class="headerlink" title="友情提醒"></a>友情提醒</h1><p>本demo仅适用于iOS8及以上系统。  </p>
+<h1 id="使用autolayout-storyboard实现弹窗"><a href="#使用autolayout-storyboard实现弹窗" class="headerlink" title="使用autolayout+storyboard实现弹窗"></a>使用autolayout+storyboard实现弹窗</h1><h2 id="第一步、storyboard创建界面"><a href="#第一步、storyboard创建界面" class="headerlink" title="第一步、storyboard创建界面"></a>第一步、storyboard创建界面</h2><p>1、打开storyboard 拖一个UIViewcontroller出来，并与class相关联</p>
+<a id="more"></a>
+<p>2、拖出一个UIView作为弹窗视图的容器，容器里放置弹窗的内容，容器高度根据具体需求放置。容器放在最底部 </p>
+<p>3、放置一个UIButton在容器View的上方间距为0，并把UIButton设置为黑色（用于实现蒙版效果及点击空白处关闭弹窗）</p>
+<p>4、约束。底部容器打left、right、bottom、height这个约束。UIButton打 left、right、top、bottom约束 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807175904825-369553193.png" alt="image"><br>底部容器约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180343168-1347233876.png" alt="image"><br>UIButton约束<br></div>
+
+<p>5、约束。将底部容器的bottom约束编辑修改 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180729684-462217795.png" alt="image"><br>修改容器bottom约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180935434-792688910.png" alt="image"><br>修改容器bottom约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181130700-1845924649.png" alt="image"><br>修改容器bottom约束<br></div>
+
+<p>6、找到底部容器的bottom约束拉线到对应的UIViewController 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181841497-1876214160.png" alt="image"><br>拉线<br></div>
+
+<h2 id="第二步、设置蒙版及弹窗动画"><a href="#第二步、设置蒙版及弹窗动画" class="headerlink" title="第二步、设置蒙版及弹窗动画"></a>第二步、设置蒙版及弹窗动画</h2><p>1、修改UIButton的透明度并把UIViewController的View的背景色设置为透明 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807190653059-1295967993.png" alt="image"><br>设置透明度<br></div>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//千万别设置view的alpha 设置alpha 会导致view下的所有子视图都变透明</div><div class="line">self.view.backgroundColor = [UIColor clearColor];</div><div class="line"></div><div class="line">//设置按钮透明度</div><div class="line">self.dismissBtn.alpha = 0.5f;</div><div class="line">self.dismissBtn.backgroundColor = [UIColor blackColor];</div></pre></td></tr></table></figure>
+<p>2、实现弹窗动画，在viewDidAppear中实现，这样才可以看到整个动画过程 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191214481-1562655370.png" alt="image"><br>修改约束<br></div>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//视图显示完 弹出弹窗</div><div class="line">- (void)viewDidAppear:(BOOL)animated &#123;</div><div class="line">    [super viewDidAppear:animated];</div><div class="line">    </div><div class="line">    //更改视图 底部约束</div><div class="line">    self.viewBottomConstraint.constant = 0;</div><div class="line">    </div><div class="line">    //执行动画</div><div class="line">    [UIView animateWithDuration:0.25 animations:^&#123;</div><div class="line">        </div><div class="line">        //强制更新约束</div><div class="line">        [self.view layoutIfNeeded];</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3、弹出模态视图 如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191933184-189155919.png" alt="image"><br>模态视图<br></div>
+
+<p>请注意看截图，该方法所在类为ViewController<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#pragma mark- 按钮点击事件</div><div class="line">- (void)popBtn:(UIButton *)btn &#123;</div><div class="line">    </div><div class="line">    UIStoryboard * sb = [UIStoryboard storyboardWithName:@&quot;Main&quot; bundle:nil];</div><div class="line">    QWPopupWindowVC * vc = [sb instantiateViewControllerWithIdentifier:@&quot;QWPopupWindowVC&quot;];</div><div class="line">    vc.providesPresentationContextTransitionStyle = YES;</div><div class="line">    vc.definesPresentationContext = YES;</div><div class="line">    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;</div><div class="line">    [self presentViewController:vc animated:NO completion:nil];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>几个属性的解释  </p>
+<blockquote>
+<p>解释内容摘至博客园 返回主页不打扰是我的温柔 <a href="http://www.cnblogs.com/SenDylan/p/3953832.html" target="_blank" rel="external">http://www.cnblogs.com/SenDylan/p/3953832.html</a>  </p>
+</blockquote>
+<p>providesPresentationContextTransitionStyle</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192018106-1442728786.png" alt="image"><br></div>
+
+<p>definesPresentationContext</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192726481-1498336537.png" alt="image"><br></div>
+
+
+<p>modalPresentationStyle</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193013293-1451604844.png" alt="image"><br></div><br>部分类容读起来怪怪的，不清楚是不是翻译软件的原因。<br><br>4、关闭弹窗<br><div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193422418-654040597.png" alt="image"><br>关闭弹窗<br></div>
+
+<h1 id="演示gif"><a href="#演示gif" class="headerlink" title="演示gif"></a>演示gif</h1><div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193807153-800741518.gif" alt="image"><br></div>
+
+<h1 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h1><p><a href="https://github.com/quanweiwang/QWPopupWindow" target="_blank" rel="external">demo下载</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h1&gt;&lt;p&gt;炒下冷饭，该篇文章发表于2016-08-07，发表在博客园&lt;a href=&quot;https://www.cnblogs.com/wangqw/p/5738777.html&quot;&gt;https://www.cnblogs.com/wangqw/p/5738777.html&lt;/a&gt;，现重新排版发表于此。&lt;/p&gt;
+&lt;h1 id=&quot;友情提醒&quot;&gt;&lt;a href=&quot;#友情提醒&quot; class=&quot;headerlink&quot; title=&quot;友情提醒&quot;&gt;&lt;/a&gt;友情提醒&lt;/h1&gt;&lt;p&gt;本demo仅适用于iOS8及以上系统。  &lt;/p&gt;
+&lt;h1 id=&quot;使用autolayout-storyboard实现弹窗&quot;&gt;&lt;a href=&quot;#使用autolayout-storyboard实现弹窗&quot; class=&quot;headerlink&quot; title=&quot;使用autolayout+storyboard实现弹窗&quot;&gt;&lt;/a&gt;使用autolayout+storyboard实现弹窗&lt;/h1&gt;&lt;h2 id=&quot;第一步、storyboard创建界面&quot;&gt;&lt;a href=&quot;#第一步、storyboard创建界面&quot; class=&quot;headerlink&quot; title=&quot;第一步、storyboard创建界面&quot;&gt;&lt;/a&gt;第一步、storyboard创建界面&lt;/h2&gt;&lt;p&gt;1、打开storyboard 拖一个UIViewcontroller出来，并与class相关联&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>iOS12 Xcode10 升级后报错临时解决方案</title>
+    <link href="http://www.wangquanwei.com/2018-09-18-1.html"/>
+    <id>http://www.wangquanwei.com/2018-09-18-1.html</id>
+    <published>2018-09-18T04:11:08.000Z</published>
+    <updated>2018-10-12T14:45:16.046Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://dingyue.nosdn.127.net/HJZuEuCFDQDkHTF=Y6EkDohLuH7BlDWGqjgC0byV6wfvd1520979271974.jpg" alt="image">  </p>
+<p>图片来源百度图片</p>
+<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>本篇文章写于2018.09.18 星期二</p>
+<h1 id="已知问题"><a href="#已知问题" class="headerlink" title="已知问题"></a>已知问题</h1><p>Q: 重复的info.plist<br>A: 删除即可(把第三方库的info.plist删除)  </p>
+<a id="more"></a>
+<p>Q: library not found for -lstdc++.6.0.9<br>A: 从Xcode9.4.1复制  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">真机路径: </div><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/lib/libstdc++  </div><div class="line"></div><div class="line">模拟器路径: </div><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/lib/libstdc++</div><div class="line"># Xcode10</div></pre></td></tr></table></figure>
+<p>Q: libstdc++、libstdc++.6 错误<br>A: 未知(Xcode9.4.1里没找到该库)，重新安装Xcode9.4.1</p>
+<p>以上问题等第三方更新完，再使用Xcode10吧</p>
+<h1 id="Xcode9-真机编译iOS12"><a href="#Xcode9-真机编译iOS12" class="headerlink" title="Xcode9 真机编译iOS12"></a>Xcode9 真机编译iOS12</h1><p>1、下载Xcode10<br>2、安装Xcode10<br>3、选中Xcode10-&gt;右键显示包内容-&gt;Contents-&gt;Developer-&gt;Platforms-&gt;iPhoneOS.platform-&gt;DeviceSupport-&gt;把12.0 (16A366)文件夹复制到Xcode9的相同目录下即可  </p>
+<p>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</p>
+<h1 id="Xcode10-正式版-尝鲜"><a href="#Xcode10-正式版-尝鲜" class="headerlink" title="Xcode10 正式版(尝鲜)"></a>Xcode10 正式版(尝鲜)</h1><p><a href="https://download.developer.apple.com/Developer_Tools/Xcode_10/Xcode_10.xip" target="_blank" rel="external">https://download.developer.apple.com/Developer_Tools/Xcode_10/Xcode_10.xip</a></p>
+<h1 id="Xcode9-4-1"><a href="#Xcode9-4-1" class="headerlink" title="Xcode9.4.1"></a>Xcode9.4.1</h1><p><a href="https://download.developer.apple.com/Developer_Tools/Xcode_9.4.1/Xcode_9.4.1.xip" target="_blank" rel="external">https://download.developer.apple.com/Developer_Tools/Xcode_9.4.1/Xcode_9.4.1.xip</a></p>
+<h1 id="更多版本"><a href="#更多版本" class="headerlink" title="更多版本"></a>更多版本</h1><p><a href="https://developer.apple.com/download/more/" target="_blank" rel="external">https://developer.apple.com/download/more/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://dingyue.nosdn.127.net/HJZuEuCFDQDkHTF=Y6EkDohLuH7BlDWGqjgC0byV6wfvd1520979271974.jpg&quot; alt=&quot;image&quot;&gt;  &lt;/p&gt;
+&lt;p&gt;图片来源百度图片&lt;/p&gt;
+&lt;h1 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h1&gt;&lt;p&gt;本篇文章写于2018.09.18 星期二&lt;/p&gt;
+&lt;h1 id=&quot;已知问题&quot;&gt;&lt;a href=&quot;#已知问题&quot; class=&quot;headerlink&quot; title=&quot;已知问题&quot;&gt;&lt;/a&gt;已知问题&lt;/h1&gt;&lt;p&gt;Q: 重复的info.plist&lt;br&gt;A: 删除即可(把第三方库的info.plist删除)  &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>让mac系统终端支持ss的代理</title>
