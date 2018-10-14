@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wangquanwei.com/"/>
-  <updated>2018-10-12T14:43:07.273Z</updated>
+  <updated>2018-10-14T11:37:07.008Z</updated>
   <id>http://www.wangquanwei.com/</id>
   
   <author>
@@ -16,11 +16,82 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Sourcetree + gitee(码云) 使用教程</title>
+    <link href="http://www.wangquanwei.com/2018-10-14-1.html"/>
+    <id>http://www.wangquanwei.com/2018-10-14-1.html</id>
+    <published>2018-10-14T11:33:08.000Z</published>
+    <updated>2018-10-14T11:37:07.008Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>本文将介绍Mac环境下sourcetree如何从gitee(码云)Clone代码(以此献给和我一样的小白)</p>
+<h1 id="注册、登录gitee-码云"><a href="#注册、登录gitee-码云" class="headerlink" title="注册、登录gitee(码云)"></a>注册、登录gitee(码云)</h1><p>1、打开浏览器 输入<a href="https://gitee.com/" target="_blank" rel="external">https://gitee.com/</a>，点击注册 or 加入码云，如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/9FBF24F5-63C2-400C-B7C0-F03B1C803A4A.png" alt="image"><br></div>
+
+<a id="more"></a>
+<p>2、填写注册信息，如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/C9D2CE79-0046-4592-AC5A-4DB4514E2FF9.png" alt="image"><br></div>
+
+<p>3、登录码云</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/86386939-F24B-4BF9-BECC-6016B83CB3E0.png" alt="image"><br></div>
+
+<h1 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h1><p>1、点击加号创建仓库，如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/D5E08E2D-DDF3-44AE-9B4B-25DF9710750E.png" alt="image"><br></div>
+
+<p>2、填写仓库信息，如图  </p>
+<blockquote>
+<p>私有项目最多支持 5 人协作（如拥有多个私有项目，所有协作人数总计不得超过 5 人）<br>企业项目，更适合使用码云企业版， <a href="https://gitee.com/enterprise_contrast?from=private" target="_blank" rel="external">了解更多 &gt;&gt;</a></p>
+</blockquote>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/71728BC8-FF3F-451C-9DB9-F3E9F9A25027.png" alt="image"><br></div>
+
+<p>3、创建完成，如图  </p>
+<p>至此gitee(码云)上的任务完成</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/4026506F-5D19-4EAE-8F0C-88E9CD42BD44.png" alt="image"><br></div>
+
+<h1 id="Sourcetree"><a href="#Sourcetree" class="headerlink" title="Sourcetree"></a>Sourcetree</h1><p>1、下载sourcetree，如图<br><a href="https://www.sourcetreeapp.com/" target="_blank" rel="external">https://www.sourcetreeapp.com/</a></p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/5F0A3112-215A-4A6B-A2C3-4C06D4C0352E.png" alt="image"><br></div>
+
+<p>2、安装sourcetree，如图<br>2.1、安装</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/5ED8015C-E1DD-4B9E-ADA2-B7F896CFDFB6.png" alt="image"><br></div>
+
+<p>2.2、登录您的Atlassian账户<br>这里我选择使用已有账户，用谷歌账号登录(前提要科学上网)</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/2C0E0849-B79A-4837-B0DD-522B4A1FB5BE.png" alt="image"><br></div>
+
+<p>2.3 Atlassian账户<br>这里可以选择跳过设置，至此sourcetree安装配置完成</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/2A98C4C7-F255-41FC-B4D5-6907844C8C9D.png" alt="image"><br></div>
+
+<h1 id="导入gitee-码云-到sourcetree"><a href="#导入gitee-码云-到sourcetree" class="headerlink" title="导入gitee(码云)到sourcetree"></a>导入gitee(码云)到sourcetree</h1><p>1、找到之前创建的仓库，点击(克隆/下载)，复制地址，如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/BA4988F7-5FF6-4EDF-B11C-5856C4B3CAC8.png" alt="image"><br></div>
+
+<p>2、打开sourcetree，选择新建-从URL克隆，如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/7DCDD587-8220-488F-B846-43631BED2ECA.png" alt="image"><br></div>
+
+<p>3、输入gitee(码云)复制的https地址,第一次会要你输入账号密码，填入gitee(码云)注册的账号密码即可，如图</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/C382CDEC-8A6B-4D9F-804F-E666050802F5.png" alt="image"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/4B222D6D-9172-40EE-A9EE-CD42BD0F04E6.png" alt="image"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/B7ED498F-6BC0-487D-8F81-75252DF4C9BC.png" alt="image"><br><br></div>
+
+<p>4、完成</p>
+<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/0AC91107-1D5E-4F50-9FA3-D5DDF4A011AB.png" alt="image"><br></div>
+
+<h1 id="git的使用"><a href="#git的使用" class="headerlink" title="git的使用"></a>git的使用</h1><p>自行百度。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h1&gt;&lt;p&gt;本文将介绍Mac环境下sourcetree如何从gitee(码云)Clone代码(以此献给和我一样的小白)&lt;/p&gt;
+&lt;h1 id=&quot;注册、登录gitee-码云&quot;&gt;&lt;a href=&quot;#注册、登录gitee-码云&quot; class=&quot;headerlink&quot; title=&quot;注册、登录gitee(码云)&quot;&gt;&lt;/a&gt;注册、登录gitee(码云)&lt;/h1&gt;&lt;p&gt;1、打开浏览器 输入&lt;a href=&quot;https://gitee.com/&quot;&gt;https://gitee.com/&lt;/a&gt;，点击注册 or 加入码云，如图&lt;/p&gt;
+&lt;div align=center&gt;&lt;br&gt;&lt;br&gt;&lt;img src=&quot;http://ojgg6fpio.bkt.clouddn.com/9FBF24F5-63C2-400C-B7C0-F03B1C803A4A.png&quot; alt=&quot;image&quot;&gt;&lt;br&gt;&lt;/div&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>iOS 利用模态视图实现带黑色蒙版的底部弹窗</title>
     <link href="http://www.wangquanwei.com/2018-10-12-1.html"/>
     <id>http://www.wangquanwei.com/2018-10-12-1.html</id>
     <published>2018-10-12T14:42:08.000Z</published>
-    <updated>2018-10-12T14:43:07.273Z</updated>
+    <updated>2018-10-14T11:38:07.838Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>炒下冷饭，该篇文章发表于2016-08-07，发表在博客园<a href="https://www.cnblogs.com/wangqw/p/5738777.html" target="_blank" rel="external">https://www.cnblogs.com/wangqw/p/5738777.html</a>，现重新排版发表于此。</p>
 <h1 id="友情提醒"><a href="#友情提醒" class="headerlink" title="友情提醒"></a>友情提醒</h1><p>本demo仅适用于iOS8及以上系统。  </p>
@@ -88,7 +159,7 @@
     <link href="http://www.wangquanwei.com/2018-09-18-1.html"/>
     <id>http://www.wangquanwei.com/2018-09-18-1.html</id>
     <published>2018-09-18T04:11:08.000Z</published>
-    <updated>2018-10-13T09:02:01.326Z</updated>
+    <updated>2018-10-14T11:38:16.875Z</updated>
     
     <content type="html"><![CDATA[<div align="center"><br><br><img src="http://dingyue.nosdn.127.net/HJZuEuCFDQDkHTF=Y6EkDohLuH7BlDWGqjgC0byV6wfvd1520979271974.jpg" alt="image"><br><br>图片来源百度图片<br><br></div>
 
@@ -108,7 +179,7 @@
     
     <summary type="html">
     
-      &lt;div align=&#39;center&#39;&gt;&lt;br&gt;&lt;br&gt;&lt;img src=&quot;http://dingyue.nosdn.127.net/HJZuEuCFDQDkHTF=Y6EkDohLuH7BlDWGqjgC0byV6wfvd1520979271974.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;&lt;br&gt;图片来源百度图片&lt;br&gt;&lt;br&gt;&lt;/div&gt;
+      &lt;div align=center&gt;&lt;br&gt;&lt;br&gt;&lt;img src=&quot;http://dingyue.nosdn.127.net/HJZuEuCFDQDkHTF=Y6EkDohLuH7BlDWGqjgC0byV6wfvd1520979271974.jpg&quot; alt=&quot;image&quot;&gt;&lt;br&gt;&lt;br&gt;图片来源百度图片&lt;br&gt;&lt;br&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h1&gt;&lt;p&gt;本篇文章写于2018.09.18 星期二&lt;/p&gt;
 &lt;h1 id=&quot;已知问题&quot;&gt;&lt;a href=&quot;#已知问题&quot; class=&quot;headerlink&quot; title=&quot;已知问题&quot;&gt;&lt;/a&gt;已知问题&lt;/h1&gt;&lt;p&gt;Q: 重复的info.plist&lt;br&gt;A: 删除即可(把第三方库的info.plist删除)  &lt;/p&gt;
@@ -880,39 +951,6 @@
     </summary>
     
       <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Mac下安装Hexo教程</title>
-    <link href="http://www.wangquanwei.com/2016-12-29-1.html"/>
-    <id>http://www.wangquanwei.com/2016-12-29-1.html</id>
-    <published>2016-12-28T16:00:00.000Z</published>
-    <updated>2017-03-12T11:21:24.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文假设当前未安装任何环境。</p>
-<p>一、安装brew<br>打开终端，输入<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e <span class="string">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span></div></pre></td></tr></table></figure></p>
-<p>回车,会提示按任意键继续，继续会出现输入密码的提示，输入电脑的密码即可继续安装。<a id="more"></a></p>
-<p>二、安装node.js<br>打开终端，输入<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install node</div></pre></td></tr></table></figure></p>
-<p>等待安装完成，如无法安装，请使用科学上网。</p>
-<p>三、安装Xcode<br>安装Hexo前提需要安装Xcode,Xcode是什么这里不做解释相信大家都懂的，不懂自行百度。<br>下载地址:<a href="https://itunes.apple.com/cn/app/xcode/id497799835?mt=12" target="_blank" rel="external">https://itunes.apple.com/cn/app/xcode/id497799835?mt=12</a></p>
-<p>四、安装Hexo<br>打开终端，输入<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install hexo -g <span class="meta"># -g表示全局安装, npm默认只安装在当前项目。</span></div></pre></td></tr></table></figure></p>
-<p>五、Hexo使用<br>1、初始化hexo<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo init 文件夹名称 </div><div class="line"><span class="meta"># 例如 hexo init blog,hexo将会在bolg目录下生成站点文件。</span></div><div class="line"><span class="meta"># 如需指定目录请先cd到指定目录在执行。</span></div></pre></td></tr></table></figure></p>
-<p>2、生成静态网页<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate 或者 hexo g</div></pre></td></tr></table></figure></p>
-<p>3、开启服务<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server 或者 hexo s</div></pre></td></tr></table></figure></p>
-<p>大功告成！现在浏览器输入<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000</a>就可以开到hexo默认的效果啦!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;本文假设当前未安装任何环境。&lt;/p&gt;
-&lt;p&gt;一、安装brew&lt;br&gt;打开终端，输入&lt;br&gt;&lt;figure class=&quot;highlight objc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;/usr/bin/ruby -e &lt;span class=&quot;string&quot;&gt;&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;回车,会提示按任意键继续，继续会出现输入密码的提示，输入电脑的密码即可继续安装。
-    
-    </summary>
-    
-      <category term="Hexo" scheme="http://www.wangquanwei.com/categories/Hexo/"/>
     
     
   </entry>
