@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wangquanwei.com/"/>
-  <updated>2018-10-14T11:37:07.008Z</updated>
+  <updated>2018-11-01T12:56:07.111Z</updated>
   <id>http://www.wangquanwei.com/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于WRNavigationBar在XS、XS_Max、XR导航栏高度异常的修复方案</title>
+    <link href="http://www.wangquanwei.com/2018-11-01-1.html"/>
+    <id>http://www.wangquanwei.com/2018-11-01-1.html</id>
+    <published>2018-11-01T14:55:08.000Z</published>
+    <updated>2018-11-01T12:56:07.111Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>WRNavigationBar 1.2.0版本在iPhone XS Max、iPhone XR上会出现导航栏高度异常的问题。</p>
+<h1 id="导航栏异常的原因"><a href="#导航栏异常的原因" class="headerlink" title="导航栏异常的原因"></a>导航栏异常的原因</h1><p>以下代码只判断了iPhone X设备，所以在真机环境下iPhone XR、iPhone XS、iPhone XS Max会出现导航栏高度异常的问题，但作者在模拟器设备时对设备宽高做了判断，因此模拟器下iPhone XS是正常的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isIphoneX &#123;</div><div class="line">    struct utsname systemInfo;</div><div class="line">    uname(&amp;systemInfo);</div><div class="line">    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];</div><div class="line">    if ([platform isEqualToString:@&quot;i386&quot;] || [platform isEqualToString:@&quot;x86_64&quot;]) &#123;</div><div class="line">        // judgment by height when in simulators</div><div class="line">        return (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) ||</div><div class="line">                CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)));</div><div class="line">    &#125;</div><div class="line">    BOOL isIPhoneX = [platform isEqualToString:@&quot;iPhone10,3&quot;] || [platform isEqualToString:@&quot;iPhone10,6&quot;];</div><div class="line">    return isIPhoneX;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h3 id="1、找到WRNavigationBar-m文件，打开。"><a href="#1、找到WRNavigationBar-m文件，打开。" class="headerlink" title="1、找到WRNavigationBar.m文件，打开。"></a>1、找到WRNavigationBar.m文件，打开。</h3><h3 id="2、找到isIphoneX方法"><a href="#2、找到isIphoneX方法" class="headerlink" title="2、找到isIphoneX方法"></a>2、找到isIphoneX方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isIphoneX &#123;</div><div class="line">    struct utsname systemInfo;</div><div class="line">    uname(&amp;systemInfo);</div><div class="line">    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];</div><div class="line">    if ([platform isEqualToString:@&quot;i386&quot;] || [platform isEqualToString:@&quot;x86_64&quot;]) &#123;</div><div class="line">        // judgment by height when in simulators</div><div class="line">        return (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) ||</div><div class="line">                CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)));</div><div class="line">    &#125;</div><div class="line">    BOOL isIPhoneX = [platform isEqualToString:@&quot;iPhone10,3&quot;] || [platform isEqualToString:@&quot;iPhone10,6&quot;];</div><div class="line">    return isIPhoneX;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3、将其修改为以下内容，直接复制即可"><a href="#3、将其修改为以下内容，直接复制即可" class="headerlink" title="3、将其修改为以下内容，直接复制即可"></a>3、将其修改为以下内容，直接复制即可</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isIphoneX &#123;</div><div class="line">    if ([UIApplication sharedApplication].statusBarFrame.size.height == 44) &#123;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里是将作者的根据设备判断改为根据状态栏高度判断，目前刘海屏状态栏高度都是44。  </p>
+<h3 id="4、这里有个注意点"><a href="#4、这里有个注意点" class="headerlink" title="4、这里有个注意点"></a>4、这里有个注意点</h3><p>Q: 将isIphoneX方法的实现修改后，下面的判断无法返回正确的数值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+ (CGFloat)navBarBottom &#123;</div><div class="line">    return [self isIphoneX] ? 88 : 64;</div><div class="line">&#125;</div><div class="line">+ (CGFloat)tabBarHeight &#123;</div><div class="line">    return [self isIphoneX] ? 83 : 49;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>A: 将判断改写即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">+ (CGFloat)navBarBottom &#123;</div><div class="line">    </div><div class="line">    if ([self isIphoneX]) &#123;</div><div class="line">        return 88;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        return 64;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">+ (CGFloat)tabBarHeight &#123;</div><div class="line">    if ([self isIphoneX]) &#123;</div><div class="line">        return 83;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        return 49;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果没出现问题，请无视，理论上也不应该出现问题的。  </p>
+<p>Q: 修改代码后，运行app导航栏高度还是错误的，且clean项目还是无效  </p>
+<p>A: 使用cleanmymac将Xcode里的数据清除，重新编译运行app，导航栏就正常了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h1&gt;&lt;p&gt;WRNavigationBar 1.2.0版本在iPhone XS Max、iPhone X
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Sourcetree + gitee(码云) 使用教程</title>
@@ -911,42 +943,6 @@
       &lt;p&gt;一、 开发前准备&lt;/p&gt;
 &lt;p&gt;iOS 支付宝SDK下载地址：(内含iOS Android 服务端demo及SDK)&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;http://doc.open.alipay.com/doc2/detail?treeId=59&amp;amp;articleId=103563&amp;amp;docType=1&quot;&gt;http://doc.open.alipay.com/doc2/detail?treeId=59&amp;amp;articleId=103563&amp;amp;docType=1&lt;/a&gt;&lt;br&gt;&lt;img src=&quot;http://ojgg6fpio.bkt.clouddn.com/ali1.png&quot; alt=&quot;&quot;&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>iOS集成微信支付</title>
-    <link href="http://www.wangquanwei.com/2017-01-08-1.html"/>
-    <id>http://www.wangquanwei.com/2017-01-08-1.html</id>
-    <published>2017-01-08T09:24:49.000Z</published>
-    <updated>2017-07-23T15:53:46.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>一、开发前准备</p>
-<p>iOS微信支付SDK下载地址<br><a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419319164&amp;lang=zh_CN" target="_blank" rel="external">https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419319164&amp;lang=zh_CN</a></p>
-<p><img src="http://ojgg6fpio.bkt.clouddn.com/wx1.png" alt=""><a id="more"></a></p>
-<p>二、 集成微信支付</p>
-<p>1、解压WeChatSDK1.6.2_Sample.zip（忽略版本号）(这个是微信支付的Demo)<br><img src="http://ojgg6fpio.bkt.clouddn.com/wx2.png" alt=""></p>
-<p>2、创建个文件夹，找到如下文件，放到文件夹里。便于将文件统一拷入项目<br><img src="http://ojgg6fpio.bkt.clouddn.com/wx3.png" alt=""></p>
-<p>3、创建项目并将微信支付SDK添加进项目（项目创建不再演示）<br><img src="http://ojgg6fpio.bkt.clouddn.com/wx4.png" alt=""></p>
-<p>4、导入系统库（不导入编译不通过会报错）<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">SystemConfiguration.framework</div><div class="line"></div><div class="line">libz.tbd </div><div class="line"></div><div class="line">libsqlite3<span class="number">.0</span>.tbd</div><div class="line"></div><div class="line">CoreTelephony.framework</div></pre></td></tr></table></figure></p>
-<p>5、修改info.plist文件<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//iOS 9系统策略更新，限制了http协议的访问，此外应用需要在“Info.plist”中将要使用的URL Schemes列为白名单，才可正常检查其他应用是否安装。</div><div class="line">//受此影响，当你的应用在iOS 9中需要使用微信SDK的相关能力（分享、收藏、支付、登录等）时，需要在“Info.plist”里增加如下代码：</div><div class="line">&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;</div><div class="line">&lt;array&gt;</div><div class="line">&lt;string&gt;weixin&lt;/string&gt;</div><div class="line">&lt;/array&gt;</div><div class="line">&lt;key&gt;NSAppTransportSecurity&lt;/key&gt;</div><div class="line">&lt;dict&gt;</div><div class="line">&lt;key&gt;NSAllowsArbitraryLoads&lt;/key&gt;</div><div class="line">&lt;true/&gt;</div><div class="line">&lt;/dict&gt;</div></pre></td></tr></table></figure></p>
-<p>6、注册微信支付<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//导入头文件</span></div><div class="line"><span class="meta">#import <span class="meta-string">"WXApi.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"WXApiManager.h"</span></span></div></pre></td></tr></table></figure></p>
-<p>在AppDelegate里<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions</div></pre></td></tr></table></figure></p>
-<p><img src="http://ojgg6fpio.bkt.clouddn.com/wx5.png" alt=""><br><img src="http://ojgg6fpio.bkt.clouddn.com/wx6.png" alt=""></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application handleOpenURL:(<span class="built_in">NSURL</span> *)url &#123;</div><div class="line">    <span class="keyword">return</span>  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application openURL:(<span class="built_in">NSURL</span> *)url sourceApplication:(<span class="built_in">NSString</span> *)sourceApplication annotation:(<span class="keyword">id</span>)annotation &#123;</div><div class="line">    <span class="keyword">return</span> [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>7、调用微信支付<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#pragma mark -- 微信支付 --</span></div><div class="line">- (<span class="keyword">void</span>)WeChatPay&#123;</div><div class="line"></div><div class="line">    PayReq *req   = [[PayReq alloc] init];</div><div class="line"></div><div class="line">    <span class="comment">/** 由用户微信号和AppID组成的唯一标识，发送请求时第三方程序必须填写，用于校验微信用户是否换号登录*/</span></div><div class="line">    req.openID = <span class="string">@""</span>;<span class="comment">//服务器返回</span></div><div class="line"></div><div class="line">    <span class="comment">/** 商家向财付通申请的商家id */</span></div><div class="line">    req.partnerId = <span class="string">@""</span>;<span class="comment">//服务器返回</span></div><div class="line"></div><div class="line">    <span class="comment">/** 预支付订单 */</span></div><div class="line">    req.prepayId  = <span class="string">@""</span>;<span class="comment">//服务器返回</span></div><div class="line"></div><div class="line">    <span class="comment">/** 商家根据财付通文档填写的数据和签名 */</span></div><div class="line">    req.package   = <span class="string">@""</span>;<span class="comment">//服务器返回 注意iOS只能是 Sign=WXPay 即req.package = Sign=WXPay</span></div><div class="line"></div><div class="line">    <span class="comment">/** 随机串，防重发 */</span></div><div class="line">    req.nonceStr  = <span class="string">@""</span>;<span class="comment">//服务器返回</span></div><div class="line"></div><div class="line">    <span class="comment">/** 时间戳，防重发 */</span></div><div class="line">    <span class="built_in">NSString</span> * stamp = <span class="string">@""</span>;<span class="comment">//服务器返回</span></div><div class="line">    req.timeStamp = stamp.intValue;</div><div class="line"></div><div class="line">    <span class="comment">/** 商家根据微信开放平台文档对数据做的签名 */</span></div><div class="line">    req.sign = <span class="string">@""</span>;<span class="comment">//服务器返回</span></div><div class="line"></div><div class="line">    <span class="comment">// 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信</span></div><div class="line">    [WXApi registerApp:<span class="string">@""</span>];</div><div class="line"></div><div class="line">    <span class="comment">//发送请求到微信，等待微信返回onResp</span></div><div class="line">    [WXApi sendReq:req];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;一、开发前准备&lt;/p&gt;
-&lt;p&gt;iOS微信支付SDK下载地址&lt;br&gt;&lt;a href=&quot;https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;amp;t=resource/res_list&amp;amp;verify=1&amp;amp;id=open1419319164&amp;amp;lang=zh_CN&quot;&gt;https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;amp;t=resource/res_list&amp;amp;verify=1&amp;amp;id=open1419319164&amp;amp;lang=zh_CN&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://ojgg6fpio.bkt.clouddn.com/wx1.png&quot; alt=&quot;&quot;&gt;
     
     </summary>
     

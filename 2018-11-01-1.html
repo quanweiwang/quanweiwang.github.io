@@ -81,7 +81,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT, iOS开发, iOS, 个人博客" />
+  <meta name="keywords" content="WRNavigationBar" />
 
 
 
@@ -99,37 +99,19 @@
 
 
 
-<meta name="description" content="Overview炒下冷饭，该篇文章发表于2016-08-07，发表在博客园https://www.cnblogs.com/wangqw/p/5738777.html，现重新排版发表于此。
-友情提醒本demo仅适用于iOS8及以上系统。  
-使用autolayout+storyboard实现弹窗第一步、storyboard创建界面1、打开storyboard 拖一个UIViewcontroller出">
+<meta name="description" content="OverviewWRNavigationBar 1.2.0版本在iPhone XS Max、iPhone XR上会出现导航栏高度异常的问题。
+导航栏异常的原因以下代码只判断了iPhone X设备，所以在真机环境下iPhone XR、iPhone XS、iPhone XS Max会出现导航栏高度异常的问题，但作者在模拟器设备时对设备宽高做了判断，因此模拟器下iPhone XS是正常的。1234567">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS 利用模态视图实现带黑色蒙版的底部弹窗">
-<meta property="og:url" content="http://www.wangquanwei.com/2018-10-12-1.html">
+<meta property="og:title" content="关于WRNavigationBar在XS、XS_Max、XR导航栏高度异常的修复方案">
+<meta property="og:url" content="http://www.wangquanwei.com/2018-11-01-1.html">
 <meta property="og:site_name" content="王权伟の博客">
-<meta property="og:description" content="Overview炒下冷饭，该篇文章发表于2016-08-07，发表在博客园https://www.cnblogs.com/wangqw/p/5738777.html，现重新排版发表于此。
-友情提醒本demo仅适用于iOS8及以上系统。  
-使用autolayout+storyboard实现弹窗第一步、storyboard创建界面1、打开storyboard 拖一个UIViewcontroller出">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807175904825-369553193.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180343168-1347233876.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180729684-462217795.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180935434-792688910.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181130700-1845924649.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181841497-1876214160.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807190653059-1295967993.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191214481-1562655370.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191933184-189155919.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192018106-1442728786.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192726481-1498336537.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193013293-1451604844.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193422418-654040597.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193807153-800741518.gif">
-<meta property="og:updated_time" content="2018-10-14T11:38:07.838Z">
+<meta property="og:description" content="OverviewWRNavigationBar 1.2.0版本在iPhone XS Max、iPhone XR上会出现导航栏高度异常的问题。
+导航栏异常的原因以下代码只判断了iPhone X设备，所以在真机环境下iPhone XR、iPhone XS、iPhone XS Max会出现导航栏高度异常的问题，但作者在模拟器设备时对设备宽高做了判断，因此模拟器下iPhone XS是正常的。1234567">
+<meta property="og:updated_time" content="2018-11-01T12:56:07.111Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS 利用模态视图实现带黑色蒙版的底部弹窗">
-<meta name="twitter:description" content="Overview炒下冷饭，该篇文章发表于2016-08-07，发表在博客园https://www.cnblogs.com/wangqw/p/5738777.html，现重新排版发表于此。
-友情提醒本demo仅适用于iOS8及以上系统。  
-使用autolayout+storyboard实现弹窗第一步、storyboard创建界面1、打开storyboard 拖一个UIViewcontroller出">
-<meta name="twitter:image" content="http://ojgg6fpio.bkt.clouddn.com/714996-20160807175904825-369553193.png">
+<meta name="twitter:title" content="关于WRNavigationBar在XS、XS_Max、XR导航栏高度异常的修复方案">
+<meta name="twitter:description" content="OverviewWRNavigationBar 1.2.0版本在iPhone XS Max、iPhone XR上会出现导航栏高度异常的问题。
+导航栏异常的原因以下代码只判断了iPhone X设备，所以在真机环境下iPhone XR、iPhone XS、iPhone XS Max会出现导航栏高度异常的问题，但作者在模拟器设备时对设备宽高做了判断，因此模拟器下iPhone XS是正常的。1234567">
 
 
 
@@ -157,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://www.wangquanwei.com/2018-10-12-1.html"/>
+  <link rel="canonical" href="http://www.wangquanwei.com/2018-11-01-1.html"/>
 
 
 
 
 
-  <title>iOS 利用模态视图实现带黑色蒙版的底部弹窗 | 王权伟の博客</title>
+  <title>关于WRNavigationBar在XS、XS_Max、XR导航栏高度异常的修复方案 | 王权伟の博客</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -303,7 +285,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.wangquanwei.com/2018-10-12-1.html">
+    <link itemprop="mainEntityOfPage" href="http://www.wangquanwei.com/2018-11-01-1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王权伟">
@@ -320,7 +302,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">iOS 利用模态视图实现带黑色蒙版的底部弹窗</h2>
+          <h2 class="post-title" itemprop="name headline">关于WRNavigationBar在XS、XS_Max、XR导航栏高度异常的修复方案</h2>
         
 
         <div class="post-meta">
@@ -332,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-12T22:42:08+08:00">
-                2018-10-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T22:55:08+08:00">
+                2018-11-01
               </time>
             
 
@@ -373,9 +355,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018-10-12-1.html#comments" itemprop="discussionUrl">
+                <a href="/2018-11-01-1.html#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018-10-12-1.html" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018-11-01-1.html" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -405,52 +387,18 @@
       
 
       
-        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>炒下冷饭，该篇文章发表于2016-08-07，发表在博客园<a href="https://www.cnblogs.com/wangqw/p/5738777.html" target="_blank" rel="external">https://www.cnblogs.com/wangqw/p/5738777.html</a>，现重新排版发表于此。</p>
-<h1 id="友情提醒"><a href="#友情提醒" class="headerlink" title="友情提醒"></a>友情提醒</h1><p>本demo仅适用于iOS8及以上系统。  </p>
-<h1 id="使用autolayout-storyboard实现弹窗"><a href="#使用autolayout-storyboard实现弹窗" class="headerlink" title="使用autolayout+storyboard实现弹窗"></a>使用autolayout+storyboard实现弹窗</h1><h2 id="第一步、storyboard创建界面"><a href="#第一步、storyboard创建界面" class="headerlink" title="第一步、storyboard创建界面"></a>第一步、storyboard创建界面</h2><p>1、打开storyboard 拖一个UIViewcontroller出来，并与class相关联</p>
-<a id="more"></a>
-<p>2、拖出一个UIView作为弹窗视图的容器，容器里放置弹窗的内容，容器高度根据具体需求放置。容器放在最底部 </p>
-<p>3、放置一个UIButton在容器View的上方间距为0，并把UIButton设置为黑色（用于实现蒙版效果及点击空白处关闭弹窗）</p>
-<p>4、约束。底部容器打left、right、bottom、height这个约束。UIButton打 left、right、top、bottom约束 如图</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807175904825-369553193.png" alt="image"><br>底部容器约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180343168-1347233876.png" alt="image"><br>UIButton约束<br></div>
-
-<p>5、约束。将底部容器的bottom约束编辑修改 如图</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180729684-462217795.png" alt="image"><br>修改容器bottom约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807180935434-792688910.png" alt="image"><br>修改容器bottom约束<br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181130700-1845924649.png" alt="image"><br>修改容器bottom约束<br></div>
-
-<p>6、找到底部容器的bottom约束拉线到对应的UIViewController 如图</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807181841497-1876214160.png" alt="image"><br>拉线<br></div>
-
-<h2 id="第二步、设置蒙版及弹窗动画"><a href="#第二步、设置蒙版及弹窗动画" class="headerlink" title="第二步、设置蒙版及弹窗动画"></a>第二步、设置蒙版及弹窗动画</h2><p>1、修改UIButton的透明度并把UIViewController的View的背景色设置为透明 如图</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807190653059-1295967993.png" alt="image"><br>设置透明度<br></div>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//千万别设置view的alpha 设置alpha 会导致view下的所有子视图都变透明</div><div class="line">self.view.backgroundColor = [UIColor clearColor];</div><div class="line"></div><div class="line">//设置按钮透明度</div><div class="line">self.dismissBtn.alpha = 0.5f;</div><div class="line">self.dismissBtn.backgroundColor = [UIColor blackColor];</div></pre></td></tr></table></figure>
-<p>2、实现弹窗动画，在viewDidAppear中实现，这样才可以看到整个动画过程 如图</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191214481-1562655370.png" alt="image"><br>修改约束<br></div>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//视图显示完 弹出弹窗</div><div class="line">- (void)viewDidAppear:(BOOL)animated &#123;</div><div class="line">    [super viewDidAppear:animated];</div><div class="line">    </div><div class="line">    //更改视图 底部约束</div><div class="line">    self.viewBottomConstraint.constant = 0;</div><div class="line">    </div><div class="line">    //执行动画</div><div class="line">    [UIView animateWithDuration:0.25 animations:^&#123;</div><div class="line">        </div><div class="line">        //强制更新约束</div><div class="line">        [self.view layoutIfNeeded];</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>3、弹出模态视图 如图</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807191933184-189155919.png" alt="image"><br>模态视图<br></div>
-
-<p>请注意看截图，该方法所在类为ViewController<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">#pragma mark- 按钮点击事件</div><div class="line">- (void)popBtn:(UIButton *)btn &#123;</div><div class="line">    </div><div class="line">    UIStoryboard * sb = [UIStoryboard storyboardWithName:@&quot;Main&quot; bundle:nil];</div><div class="line">    QWPopupWindowVC * vc = [sb instantiateViewControllerWithIdentifier:@&quot;QWPopupWindowVC&quot;];</div><div class="line">    vc.providesPresentationContextTransitionStyle = YES;</div><div class="line">    vc.definesPresentationContext = YES;</div><div class="line">    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;</div><div class="line">    [self presentViewController:vc animated:NO completion:nil];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>几个属性的解释  </p>
-<blockquote>
-<p>解释内容摘至博客园 返回主页不打扰是我的温柔 <a href="http://www.cnblogs.com/SenDylan/p/3953832.html" target="_blank" rel="external">http://www.cnblogs.com/SenDylan/p/3953832.html</a>  </p>
-</blockquote>
-<p>providesPresentationContextTransitionStyle</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192018106-1442728786.png" alt="image"><br></div>
-
-<p>definesPresentationContext</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807192726481-1498336537.png" alt="image"><br></div>
-
-
-<p>modalPresentationStyle</p>
-<div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193013293-1451604844.png" alt="image"><br></div><br>部分类容读起来怪怪的，不清楚是不是翻译软件的原因。<br><br>4、关闭弹窗<br><div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193422418-654040597.png" alt="image"><br>关闭弹窗<br></div>
-
-<h1 id="演示gif"><a href="#演示gif" class="headerlink" title="演示gif"></a>演示gif</h1><div align="center"><br><br><img src="http://ojgg6fpio.bkt.clouddn.com/714996-20160807193807153-800741518.gif" alt="image"><br></div>
-
-<h1 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h1><p><a href="https://github.com/quanweiwang/QWPopupWindow" target="_blank" rel="external">demo下载</a></p>
+        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>WRNavigationBar 1.2.0版本在iPhone XS Max、iPhone XR上会出现导航栏高度异常的问题。</p>
+<h1 id="导航栏异常的原因"><a href="#导航栏异常的原因" class="headerlink" title="导航栏异常的原因"></a>导航栏异常的原因</h1><p>以下代码只判断了iPhone X设备，所以在真机环境下iPhone XR、iPhone XS、iPhone XS Max会出现导航栏高度异常的问题，但作者在模拟器设备时对设备宽高做了判断，因此模拟器下iPhone XS是正常的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isIphoneX &#123;</div><div class="line">    struct utsname systemInfo;</div><div class="line">    uname(&amp;systemInfo);</div><div class="line">    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];</div><div class="line">    if ([platform isEqualToString:@&quot;i386&quot;] || [platform isEqualToString:@&quot;x86_64&quot;]) &#123;</div><div class="line">        // judgment by height when in simulators</div><div class="line">        return (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) ||</div><div class="line">                CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)));</div><div class="line">    &#125;</div><div class="line">    BOOL isIPhoneX = [platform isEqualToString:@&quot;iPhone10,3&quot;] || [platform isEqualToString:@&quot;iPhone10,6&quot;];</div><div class="line">    return isIPhoneX;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h3 id="1、找到WRNavigationBar-m文件，打开。"><a href="#1、找到WRNavigationBar-m文件，打开。" class="headerlink" title="1、找到WRNavigationBar.m文件，打开。"></a>1、找到WRNavigationBar.m文件，打开。</h3><h3 id="2、找到isIphoneX方法"><a href="#2、找到isIphoneX方法" class="headerlink" title="2、找到isIphoneX方法"></a>2、找到isIphoneX方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isIphoneX &#123;</div><div class="line">    struct utsname systemInfo;</div><div class="line">    uname(&amp;systemInfo);</div><div class="line">    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];</div><div class="line">    if ([platform isEqualToString:@&quot;i386&quot;] || [platform isEqualToString:@&quot;x86_64&quot;]) &#123;</div><div class="line">        // judgment by height when in simulators</div><div class="line">        return (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) ||</div><div class="line">                CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)));</div><div class="line">    &#125;</div><div class="line">    BOOL isIPhoneX = [platform isEqualToString:@&quot;iPhone10,3&quot;] || [platform isEqualToString:@&quot;iPhone10,6&quot;];</div><div class="line">    return isIPhoneX;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3、将其修改为以下内容，直接复制即可"><a href="#3、将其修改为以下内容，直接复制即可" class="headerlink" title="3、将其修改为以下内容，直接复制即可"></a>3、将其修改为以下内容，直接复制即可</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">+ (BOOL)isIphoneX &#123;</div><div class="line">    if ([UIApplication sharedApplication].statusBarFrame.size.height == 44) &#123;</div><div class="line">        return YES;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        return NO;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里是将作者的根据设备判断改为根据状态栏高度判断，目前刘海屏状态栏高度都是44。  </p>
+<h3 id="4、这里有个注意点"><a href="#4、这里有个注意点" class="headerlink" title="4、这里有个注意点"></a>4、这里有个注意点</h3><p>Q: 将isIphoneX方法的实现修改后，下面的判断无法返回正确的数值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">+ (CGFloat)navBarBottom &#123;</div><div class="line">    return [self isIphoneX] ? 88 : 64;</div><div class="line">&#125;</div><div class="line">+ (CGFloat)tabBarHeight &#123;</div><div class="line">    return [self isIphoneX] ? 83 : 49;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>A: 将判断改写即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">+ (CGFloat)navBarBottom &#123;</div><div class="line">    </div><div class="line">    if ([self isIphoneX]) &#123;</div><div class="line">        return 88;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        return 64;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">+ (CGFloat)tabBarHeight &#123;</div><div class="line">    if ([self isIphoneX]) &#123;</div><div class="line">        return 83;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        return 49;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果没出现问题，请无视，理论上也不应该出现问题的。  </p>
+<p>Q: 修改代码后，运行app导航栏高度还是错误的，且clean项目还是无效  </p>
+<p>A: 使用cleanmymac将Xcode里的数据清除，重新编译运行app，导航栏就正常了。</p>
 
       
     </div>
@@ -508,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018-09-18-1.html" rel="next" title="iOS12 Xcode10 升级后报错临时解决方案">
-                <i class="fa fa-chevron-left"></i> iOS12 Xcode10 升级后报错临时解决方案
+              <a href="/2018-10-14-1.html" rel="next" title="Sourcetree + gitee(码云) 使用教程">
+                <i class="fa fa-chevron-left"></i> Sourcetree + gitee(码云) 使用教程
               </a>
             
           </div>
@@ -517,10 +465,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018-10-14-1.html" rel="prev" title="Sourcetree + gitee(码云) 使用教程">
-                Sourcetree + gitee(码云) 使用教程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -687,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#友情提醒"><span class="nav-number">2.</span> <span class="nav-text">友情提醒</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用autolayout-storyboard实现弹窗"><span class="nav-number">3.</span> <span class="nav-text">使用autolayout+storyboard实现弹窗</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步、storyboard创建界面"><span class="nav-number">3.1.</span> <span class="nav-text">第一步、storyboard创建界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步、设置蒙版及弹窗动画"><span class="nav-number">3.2.</span> <span class="nav-text">第二步、设置蒙版及弹窗动画</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#演示gif"><span class="nav-number">4.</span> <span class="nav-text">演示gif</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#demo"><span class="nav-number">5.</span> <span class="nav-text">demo</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#导航栏异常的原因"><span class="nav-number">2.</span> <span class="nav-text">导航栏异常的原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决办法"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、找到WRNavigationBar-m文件，打开。"><span class="nav-number">3.0.1.</span> <span class="nav-text">1、找到WRNavigationBar.m文件，打开。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、找到isIphoneX方法"><span class="nav-number">3.0.2.</span> <span class="nav-text">2、找到isIphoneX方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、将其修改为以下内容，直接复制即可"><span class="nav-number">3.0.3.</span> <span class="nav-text">3、将其修改为以下内容，直接复制即可</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、这里有个注意点"><span class="nav-number">3.0.4.</span> <span class="nav-text">4、这里有个注意点</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -854,9 +798,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://www.wangquanwei.com/2018-10-12-1.html';
-          this.page.identifier = '2018-10-12-1.html';
-          this.page.title = 'iOS 利用模态视图实现带黑色蒙版的底部弹窗';
+          this.page.url = 'http://www.wangquanwei.com/2018-11-01-1.html';
+          this.page.identifier = '2018-11-01-1.html';
+          this.page.title = '关于WRNavigationBar在XS、XS_Max、XR导航栏高度异常的修复方案';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://wangquanwei.disqus.com/embed.js';
