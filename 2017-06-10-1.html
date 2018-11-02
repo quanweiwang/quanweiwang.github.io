@@ -109,17 +109,17 @@ protocol buffer(以下简称PB)是google 的一种数据交换的格式，它独
 <meta property="og:description" content="在写这篇文章时protocol buffer的最新版为3.3.1。
 什么是protocol buffer
 protocol buffer(以下简称PB)是google 的一种数据交换的格式，它独立于语言，独立于平台。google 提供了多种语言的实现：java、c#、c++、go 和 python，每一种实现都包含了相应语言的编译器以及库文件。由于它是一种二进制的格式，比使用 xml 进行数据交换">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B1.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B2.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B3.png">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B4.png">
-<meta property="og:updated_time" content="2018-06-23T01:16:41.077Z">
+<meta property="og:image" content="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B1.png">
+<meta property="og:image" content="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B2.png">
+<meta property="og:image" content="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B3.png">
+<meta property="og:image" content="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B4.png">
+<meta property="og:updated_time" content="2018-11-02T11:58:05.161Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mac 安装 protocol buffer（2.6.1版） 教程">
 <meta name="twitter:description" content="在写这篇文章时protocol buffer的最新版为3.3.1。
 什么是protocol buffer
 protocol buffer(以下简称PB)是google 的一种数据交换的格式，它独立于语言，独立于平台。google 提供了多种语言的实现：java、c#、c++、go 和 python，每一种实现都包含了相应语言的编译器以及库文件。由于它是一种二进制的格式，比使用 xml 进行数据交换">
-<meta name="twitter:image" content="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B1.png">
+<meta name="twitter:image" content="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B1.png">
 
 
 
@@ -412,21 +412,21 @@ protocol buffer(以下简称PB)是google 的一种数据交换的格式，它独
 <h2 id="方式二、"><a href="#方式二、" class="headerlink" title="方式二、"></a>方式二、</h2><p>1、下载protobuf：<a href="https://github.com/google/protobuf" target="_blank" rel="external">https://github.com/google/protobuf</a>    </p>
 <p>2、解压下载的protobuf，并打开终端cd到protobuf目录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd /你的存放路径/protobuf-2.6.1</div></pre></td></tr></table></figure>
-<p><img src="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B1.png" alt="image"></p>
+<p><img src="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B1.png" alt="image"></p>
 <p>3、执行autogen.sh脚本  </p>
 <p>如果按照网上大多数教程，那是执行./configure了，但是你会发现根目录下根本没有configure文件，因为protobuf的编译方式做了修改，要执行autogen.sh才会生成configure脚本。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./autogen.sh</div></pre></td></tr></table></figure>
 <p>敲黑板！！！    </p>
 <p>这里有个坑,你会发现即使你科学上网了还是time out载不下来。  </p>
-<p><img src="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B2.png" alt="image"></p>
+<p><img src="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B2.png" alt="image"></p>
 <p>我们打开autogen.sh脚本看看  </p>
-<p><img src="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B3.png" alt="image"></p>
+<p><img src="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B3.png" alt="image"></p>
 <p>看到木有，autogen.sh会去下载一个叫gtest的东东，我们打开其URL看看，404啊有木有！！！  </p>
 <p><a href="http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2" target="_blank" rel="external">http://googletest.googlecode.com/files/gtest-1.5.0.tar.bz2</a></p>
 <p>4、下载gtest-1.5.0  </p>
 <p><a href="https://github.com/google/googletest/tree/release-1.5.0" target="_blank" rel="external">https://github.com/google/googletest/tree/release-1.5.0</a></p>
 <p>下载完成后解压并把文件夹名字改成gtest，并且复制到protobuf文件夹里。</p>
-<p><img src="http://ojgg6fpio.bkt.clouddn.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B4.png" alt="image"></p>
+<p><img src="https://img.wangquanwei.com/mac%20%E5%AE%89%E8%A3%85%20protocol%20buffer%EF%BC%882.6.1%E7%89%88%EF%BC%89%20%E6%95%99%E7%A8%8B4.png" alt="image"></p>
 <p>5、重复第三步  </p>
 <p>因为本地已经有了gtest所以就不会去下载了  </p>
 <p>执行autogen.sh脚本并生成configure</p>

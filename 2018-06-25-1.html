@@ -109,15 +109,15 @@
 <meta property="og:description" content="Overview近期在开发偶遇优选2.0时遇到一个奇葩异常：Cannot modify constraints for UITabBar managed by a controller。
 结论
 自动布局只能使用在UIViews及其子类，也就是说工具栏之类的不能使用。">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/%E9%A6%96%E9%A1%B5.jpg">
-<meta property="og:image" content="http://ojgg6fpio.bkt.clouddn.com/875B69FE-847B-43C6-8FE6-6FA93147E7A6.png">
-<meta property="og:updated_time" content="2018-07-26T14:00:49.377Z">
+<meta property="og:image" content="https://img.wangquanwei.com/%E9%A6%96%E9%A1%B5.jpg">
+<meta property="og:image" content="https://img.wangquanwei.com/875B69FE-847B-43C6-8FE6-6FA93147E7A6.png">
+<meta property="og:updated_time" content="2018-11-02T11:58:50.514Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cannot modify constraints for UITabBar managed by a controller">
 <meta name="twitter:description" content="Overview近期在开发偶遇优选2.0时遇到一个奇葩异常：Cannot modify constraints for UITabBar managed by a controller。
 结论
 自动布局只能使用在UIViews及其子类，也就是说工具栏之类的不能使用。">
-<meta name="twitter:image" content="http://ojgg6fpio.bkt.clouddn.com/%E9%A6%96%E9%A1%B5.jpg">
+<meta name="twitter:image" content="https://img.wangquanwei.com/%E9%A6%96%E9%A1%B5.jpg">
 
 
 
@@ -398,10 +398,10 @@
 <p>自动布局只能使用在UIViews及其子类，也就是说工具栏之类的不能使用。</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p><img src="http://ojgg6fpio.bkt.clouddn.com/%E9%A6%96%E9%A1%B5.jpg" alt="image"></p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p><img src="https://img.wangquanwei.com/%E9%A6%96%E9%A1%B5.jpg" alt="image"></p>
 <p>给UITabbarController的tabbar addSubView子视图（即红色线条那块），然后给子视图设置约束导致的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">self.bottomLineView = [[UIView alloc] init];</div><div class="line">self.bottomLineView.backgroundColor = RGB_HEX(0xcc5253);</div><div class="line">[self.tabBar addSubview:self.bottomLineView];</div><div class="line"></div><div class="line">[self.bottomLineView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.left.equalTo(self.tabBar);</div><div class="line">    make.width.equalTo(self.bottomLineViewWidth);</div><div class="line">    make.top.equalTo(self.tabBar);</div><div class="line">    make.height.equalTo(3);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
-<p>查阅api发现<br><img src="http://ojgg6fpio.bkt.clouddn.com/875B69FE-847B-43C6-8FE6-6FA93147E7A6.png" alt="image"></p>
+<p>查阅api发现<br><img src="https://img.wangquanwei.com/875B69FE-847B-43C6-8FE6-6FA93147E7A6.png" alt="image"></p>
 <blockquote>
 <p>// Provided for -[UIActionSheet showFromTabBar:]. Attempting to modify  the contents of the tab bar directly will throw an exception.  </p>
 <p>//提供-[UIActionSheet showFromTabBar:]。尝试直接修改选项卡栏的内容将抛出异常。</p>
