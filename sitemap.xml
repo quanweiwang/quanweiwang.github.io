@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.wangquanwei.com/404.html</loc>
+    
+    <lastmod>2018-11-17T12:05:18.092Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.wangquanwei.com/about/index.html</loc>
+    
+    <lastmod>2018-11-17T11:53:03.067Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.wangquanwei.com/2018-09-18-1.html</loc>
     
     <lastmod>2018-11-17T11:18:47.035Z</lastmod>
@@ -124,20 +138,6 @@
     <loc>http://www.wangquanwei.com/2017-02-06-1.html</loc>
     
     <lastmod>2018-10-13T09:08:11.413Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.wangquanwei.com/about/index.html</loc>
-    
-    <lastmod>2018-05-27T02:41:05.275Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.wangquanwei.com/404.html</loc>
-    
-    <lastmod>2017-07-14T14:58:20.000Z</lastmod>
     
   </url>
   
