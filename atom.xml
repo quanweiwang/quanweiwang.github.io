@@ -63,6 +63,70 @@
   </entry>
   
   <entry>
+    <title>WKWebView JS与OC间相互传值调用</title>
+    <link href="http://www.wangquanwei.com/2018-12-06-1.html"/>
+    <id>http://www.wangquanwei.com/2018-12-06-1.html</id>
+    <published>2018-12-06T06:17:08.000Z</published>
+    <updated>2018-12-07T06:19:34.126Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>本文使用wkwebView进行JS与OC、OC与JS间的传值和方法调用。</p>
+<h1 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h1><p>1、导入WebKit.framework</p>
+<div align="center"><br><br><img src="https://img.wangquanwei.com/A2C47263-82A8-4C2C-AE00-8D0F4B2C7A1A.png" alt="image"><br><br></div>
+
+<p>2、声明WKWebView</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@interface ViewController ()</div><div class="line">@property (nonatomic, strong) WKWebView * webView;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h1 id="JS调用OC原生方法"><a href="#JS调用OC原生方法" class="headerlink" title="JS调用OC原生方法"></a>JS调用OC原生方法</h1><p>1、前端在js文件中实现</p>
+<p>这里要注意messageHandlers后面跟着的deviceInfo要与原生的定义的一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//有参数</div><div class="line">window.webkit.messageHandlers.deviceInfo.postMessage(&#123;</div><div class="line">        &quot;body&quot;: &quot;buttonActionMessage&quot;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//无参数</div><div class="line">window.webkit.messageHandlers.deviceInfo.postMessage(&quot;&quot;);</div></pre></td></tr></table></figure>
+<p>2、iOS 实现WKScriptMessageHandler协议</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@interface ViewController ()&lt;WKScriptMessageHandler&gt;</div><div class="line">@property (nonatomic, strong) WKWebView * webView;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>3、iOS 初始化WKWebView  </p>
+<p>这里注意[userController addScriptMessageHandler:self name:@”deviceInfo”];<br>这个方法里的deviceInfo要与前端定义的一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line">    // Do any additional setup after loading the view, typically from a nib.</div><div class="line">    </div><div class="line">    WKWebViewConfiguration *configuration = [[WKWebViewConfiguration alloc] init];</div><div class="line">    WKUserContentController *userController = [[WKUserContentController alloc] init];</div><div class="line">    configuration.userContentController = userController;</div><div class="line">    self.webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:configuration];</div><div class="line">    [userController addScriptMessageHandler:self name:@&quot;deviceInfo&quot;];</div><div class="line">    </div><div class="line">    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:kURL]];</div><div class="line">    [self.webView loadRequest:request];</div><div class="line">    [self.view addSubview:self.webView];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>4、iOS 实现WKScriptMessageHandler协议方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message &#123;</div><div class="line">    </div><div class="line">    if ([message.name isEqualToString:@&quot;deviceInfo&quot;]) &#123;</div><div class="line">        </div><div class="line">        NSString *deviceInfoStr = message.body;</div><div class="line">        NSLog(@&quot;deviceInfo:%@&quot;, deviceInfoStr);</div><div class="line">        </div><div class="line">        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;JS调用的OC回调方法&quot; preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">        UIAlertAction *action = [UIAlertAction actionWithTitle:@&quot;ok&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">        [alert addAction:action];</div><div class="line">        [self presentViewController:alert animated:YES completion:nil];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>message.body就是前端传来的参数</p>
+<h1 id="OC调用JS方法"><a href="#OC调用JS方法" class="headerlink" title="OC调用JS方法"></a>OC调用JS方法</h1><p>1、实现WKNavigationDelegate协议</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@interface ViewController ()&lt;WKScriptMessageHandler,WKNavigationDelegate&gt;</div><div class="line">@property (nonatomic, strong) WKWebView * webView;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p>2、实现WKNavigationDelegate协议的- webView: didFinishNavigation:方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3、OC调用JS方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation &#123;</div><div class="line">    </div><div class="line">    [webView evaluateJavaScript:@&quot;deviceInfo(&apos;8.3&apos;)&quot; completionHandler:^(id _Nullable result, NSError * _Nullable error) &#123;</div><div class="line">        NSLog(@&quot;ok&quot;);</div><div class="line">    &#125;];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中deviceInfo(‘8.3’)为前端给出的JS方法名8.3是需要传给前端的参数  </p>
+<p>4、注意事项  </p>
+<p>以下错误的解决方法</p>
+<div align="center"><br><br><img src="https://img.wangquanwei.com/WechatIMG45.jpeg" alt="image"><br><br></div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (void)evaluateJavaScript:(NSString *)javaScriptString completionHandler:(void (^ _Nullable)(_Nullable id, NSError * _Nullable error))completionHandler;</div></pre></td></tr></table></figure>
+<p>一定要在网页加载完成后调用，否则报错  </p>
+<p>JS方法一定要放在最外层</p>
+<div align="center"><br><br><img src="https://img.wangquanwei.com/WechatIMG47.png" alt="image"><br><br></div>
+
+
+
+
+
+
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h1&gt;&lt;p&gt;本文使用wkwebView进行JS与OC、OC与JS间的传值和方法调用。&lt;/p&gt;
+&lt;h1 id=&quot;前置条件&quot;&gt;&lt;a href=&quot;#前置条件&quot; class=&quot;headerlink&quot; title=&quot;前置条件&quot;&gt;&lt;/a&gt;前置条件&lt;/h1&gt;&lt;p&gt;1、导入WebKit.framework&lt;/p&gt;
+&lt;div align=center&gt;&lt;br&gt;&lt;br&gt;&lt;img src=&quot;https://img.wangquanwei.com/A2C47263-82A8-4C2C-AE00-8D0F4B2C7A1A.png&quot; alt=&quot;image&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;
+
+&lt;p&gt;2、声明WKWebView&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;@interface ViewController ()&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@property (nonatomic, strong) WKWebView * webView;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;@end&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>关于WRNavigationBar在XS、XS_Max、XR导航栏高度异常的修复方案</title>
     <link href="http://www.wangquanwei.com/2018-11-01-1.html"/>
     <id>http://www.wangquanwei.com/2018-11-01-1.html</id>
@@ -942,28 +1006,6 @@
     
       &lt;p&gt;今天在项目中加入了SnapKit时出现Archive打包不生成ipa而是出现Xcode Archive的情况，于是乎Google了一番，现将解决方案记录如下：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;https://img.wangquanwei.com/111.png&quot; alt=&quot;Xcode Archive&quot;&gt;
-    
-    </summary>
-    
-      <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>iOS 隐藏导航栏时切换页面出现黑条的解决办法</title>
-    <link href="http://www.wangquanwei.com/2017-02-06-1.html"/>
-    <id>http://www.wangquanwei.com/2017-02-06-1.html</id>
-    <published>2017-02-06T13:44:20.000Z</published>
-    <updated>2018-10-13T09:08:11.413Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="解决方法如下"><a href="#解决方法如下" class="headerlink" title="解决方法如下:"></a>解决方法如下:</h2><p>实现UINavigationControllerDelegate的- navigationController:willShowViewController:animated: 方法 <a id="more"></a></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()&lt;<span class="title">UINavigationControllerDelegate</span>&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></div><div class="line">    <span class="keyword">self</span>.navigationController.delegate = <span class="keyword">self</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</div><div class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</div><div class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#pragma mark - UINavigationControllerDelegate -</span></div><div class="line">- (<span class="keyword">void</span>)navigationController:(<span class="built_in">UINavigationController</span> *)navigationController willShowViewController:(<span class="built_in">UIViewController</span> *)viewController animated:(<span class="built_in">BOOL</span>)animated &#123;</div><div class="line">    </div><div class="line">    <span class="comment">//判断当前viewController 是否是需要隐藏导航栏，如果是需要隐藏的VC isViewController将为YES 反之 NO 将会显示出导航栏</span></div><div class="line">    <span class="comment">//其中viewController为navigationController: willShowViewController: animated: 方法里的参数viewController</span></div><div class="line">    <span class="comment">//[ViewController class]中的ViewController为具体需要隐藏导航栏的类名</span></div><div class="line">    <span class="built_in">BOOL</span> isViewController = [viewController isKindOfClass:[ViewController <span class="keyword">class</span>]];</div><div class="line">    [navigationController setNavigationBarHidden:isViewController animated:<span class="literal">true</span>];</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;解决方法如下&quot;&gt;&lt;a href=&quot;#解决方法如下&quot; class=&quot;headerlink&quot; title=&quot;解决方法如下:&quot;&gt;&lt;/a&gt;解决方法如下:&lt;/h2&gt;&lt;p&gt;实现UINavigationControllerDelegate的- navigationController:willShowViewController:animated: 方法
     
     </summary>
     
