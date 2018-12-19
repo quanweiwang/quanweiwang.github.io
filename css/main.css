@@ -1792,7 +1792,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffb465;
+  background: #ff0322;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -1902,6 +1902,24 @@ pre .javascript .function {
 }
 .post-toc .nav .active-current > a:hover {
   color: #87daff;
+}
+.site-advert-image {
+  display: block;
+  margin: 0 auto;
+  padding: 2px;
+  max-width: 250px;
+}
+.site-advert-name {
+  margin: 5px 0 0;
+  text-align: center;
+  color: #f5f5f5;
+  font-weight: normal;
+}
+.site-description {
+  margin-top: 5px;
+  text-align: center;
+  font-size: 14px;
+  color: #999;
 }
 .footer {
   font-size: 14px;
