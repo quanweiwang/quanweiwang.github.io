@@ -4,6 +4,42 @@
 
     
   <url>
+    <loc>http://www.wangquanwei.com/2018-09-18-1.html</loc>
+    <lastmod>2019-01-03T09:04:03.690Z</lastmod>
+    <data>
+        <display>
+        <title>iOS12 Xcode10 升级后报错临时解决方案</title>
+        <pubTime>2018-09-18T04:11:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wangquanwei.com/2018-10-12-1.html</loc>
+    <lastmod>2019-01-03T09:00:45.497Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 利用模态视图实现带黑色蒙版的底部弹窗</title>
+        <pubTime>2018-10-12T14:42:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.wangquanwei.com/2018-11-01-1.html</loc>
     <lastmod>2019-01-03T08:52:47.118Z</lastmod>
     <data>
@@ -78,48 +114,12 @@
     
     
   <url>
-    <loc>http://www.wangquanwei.com/2018-09-18-1.html</loc>
-    <lastmod>2018-11-17T11:18:47.035Z</lastmod>
-    <data>
-        <display>
-        <title>iOS12 Xcode10 升级后报错临时解决方案</title>
-        <pubTime>2018-09-18T04:11:08.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.wangquanwei.com/2018-06-11-1.html</loc>
     <lastmod>2018-11-02T12:12:18.786Z</lastmod>
     <data>
         <display>
         <title>UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法</title>
         <pubTime>2018-06-11T03:37:08.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wangquanwei.com/2018-10-12-1.html</loc>
-    <lastmod>2018-11-02T11:59:07.697Z</lastmod>
-    <data>
-        <display>
-        <title>iOS 利用模态视图实现带黑色蒙版的底部弹窗</title>
-        <pubTime>2018-10-12T14:42:08.000Z</pubTime>
         
          
            
