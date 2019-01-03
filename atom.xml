@@ -685,7 +685,7 @@
     <link href="http://www.wangquanwei.com/2017-10-09-1.html"/>
     <id>http://www.wangquanwei.com/2017-10-09-1.html</id>
     <published>2017-10-09T07:13:08.000Z</published>
-    <updated>2018-11-02T11:58:17.849Z</updated>
+    <updated>2019-01-03T09:37:06.242Z</updated>
     
     <content type="html"><![CDATA[<h1 id="syntax-error-unexpected-end-of-file"><a href="#syntax-error-unexpected-end-of-file" class="headerlink" title="syntax error: unexpected end of file"></a>syntax error: unexpected end of file</h1><p><img src="https://img.wangquanwei.com/cocoapods%2010.13%20%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8.png" alt="image"><br><a id="more"></a></p>
 <h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//我开了科学上网</div><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
@@ -781,7 +781,7 @@
     <link href="http://www.wangquanwei.com/2017-06-10-1.html"/>
     <id>http://www.wangquanwei.com/2017-06-10-1.html</id>
     <published>2017-06-10T12:23:22.000Z</published>
-    <updated>2018-11-02T11:58:05.161Z</updated>
+    <updated>2019-01-03T09:45:49.512Z</updated>
     
     <content type="html"><![CDATA[<p>在写这篇文章时protocol buffer的最新版为3.3.1。</p>
 <h1 id="什么是protocol-buffer"><a href="#什么是protocol-buffer" class="headerlink" title="什么是protocol buffer"></a>什么是protocol buffer</h1><blockquote>
