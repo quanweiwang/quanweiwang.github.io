@@ -162,7 +162,7 @@
     <link href="http://www.wangquanwei.com/2018-10-14-1.html"/>
     <id>http://www.wangquanwei.com/2018-10-14-1.html</id>
     <published>2018-10-14T11:33:08.000Z</published>
-    <updated>2018-11-02T11:59:14.082Z</updated>
+    <updated>2019-01-03T08:01:21.414Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>本文将介绍Mac环境下sourcetree如何从gitee(码云)Clone代码(以此献给和我一样的小白)</p>
 <h1 id="注册、登录gitee-码云"><a href="#注册、登录gitee-码云" class="headerlink" title="注册、登录gitee(码云)"></a>注册、登录gitee(码云)</h1><p>1、打开浏览器 输入<a href="https://gitee.com/" target="_blank" rel="external">https://gitee.com/</a>，点击注册 or 加入码云，如图</p>
