@@ -4,6 +4,42 @@
 
     
   <url>
+    <loc>http://www.wangquanwei.com/2018-03-31-1.html</loc>
+    <lastmod>2019-01-03T09:22:34.731Z</lastmod>
+    <data>
+        <display>
+        <title>iOS Share Extensions开发教程</title>
+        <pubTime>2018-03-31T02:55:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wangquanwei.com/2018-06-11-1.html</loc>
+    <lastmod>2019-01-03T09:18:53.491Z</lastmod>
+    <data>
+        <display>
+        <title>UITableView Header Footer View使用autolayout时报约束异常的解决方法</title>
+        <pubTime>2018-06-11T03:37:08.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.wangquanwei.com/2018-07-28-1.html</loc>
     <lastmod>2019-01-03T09:08:32.731Z</lastmod>
     <data>
@@ -132,48 +168,12 @@
     
     
   <url>
-    <loc>http://www.wangquanwei.com/2018-06-11-1.html</loc>
-    <lastmod>2018-11-02T12:12:18.786Z</lastmod>
-    <data>
-        <display>
-        <title>UITableViewHeaderFooterView使用autolayout时报约束异常的解决方法</title>
-        <pubTime>2018-06-11T03:37:08.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.wangquanwei.com/2018-06-25-1.html</loc>
     <lastmod>2018-11-02T11:58:50.514Z</lastmod>
     <data>
         <display>
         <title>Cannot modify constraints for UITabBar managed by a controller</title>
         <pubTime>2018-06-25T04:43:08.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.wangquanwei.com/2018-03-31-1.html</loc>
-    <lastmod>2018-11-02T11:58:37.458Z</lastmod>
-    <data>
-        <display>
-        <title>iOS Share Extensions开发教程</title>
-        <pubTime>2018-03-31T02:55:08.000Z</pubTime>
         
          
            
