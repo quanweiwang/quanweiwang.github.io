@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wangquanwei.com/"/>
-  <updated>2018-12-07T03:46:54.337Z</updated>
+  <updated>2019-01-03T08:43:53.771Z</updated>
   <id>http://www.wangquanwei.com/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>iOS 爱奇艺客户端多个tabbar的几种技术实现</title>
+    <title>iOS 爱奇艺客户端多个UITabBar的几种技术实现</title>
     <link href="http://www.wangquanwei.com/2018-12-07-1.html"/>
     <id>http://www.wangquanwei.com/2018-12-07-1.html</id>
     <published>2018-12-07T03:46:08.000Z</published>
-    <updated>2018-12-07T03:46:54.337Z</updated>
+    <updated>2019-01-03T08:43:53.771Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>本文将讲解实现类似爱奇艺iOS客户端泡泡UI的几种实现以及几种实现可能出现的坑。  </p>
 <p>爱奇艺iOS客户端首页底部有5个按钮UITabBar实现，最右边一个是泡泡按钮，点击泡泡按钮将会push到一个带有UITabBar的界面(第一次见到这种设计)。 </p>
@@ -127,7 +127,7 @@
     <link href="http://www.wangquanwei.com/2018-11-01-1.html"/>
     <id>http://www.wangquanwei.com/2018-11-01-1.html</id>
     <published>2018-11-01T14:55:08.000Z</published>
-    <updated>2018-11-02T12:07:22.849Z</updated>
+    <updated>2019-01-03T08:52:47.118Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>WRNavigationBar 1.2.0版本在iPhone XS Max、iPhone XR上会出现导航栏高度异常的问题。</p>
 <h1 id="导航栏异常的原因"><a href="#导航栏异常的原因" class="headerlink" title="导航栏异常的原因"></a>导航栏异常的原因</h1><p>以下代码只判断了iPhone X设备，所以在真机环境下iPhone XR、iPhone XS、iPhone XS Max会出现导航栏高度异常的问题，但作者在模拟器设备时对设备宽高做了判断，因此模拟器下iPhone XS是正常的。</p>
