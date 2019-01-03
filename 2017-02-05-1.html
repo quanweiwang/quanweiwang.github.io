@@ -1,396 +1,56 @@
-<!doctype html>
 
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="CnfyuWLAJaBycXiHVHkCfGLzqW5JiUIMAZGBbRd8iRs" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="7RkZahD6PE" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT, iOS开发, iOS, 个人博客" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="王权伟の博客" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="一、 开发前准备
-iOS 支付宝SDK下载地址：(内含iOS Android 服务端demo及SDK)
-http://doc.open.alipay.com/doc2/detail?treeId=59&amp;amp;articleId=103563&amp;amp;docType=1">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS集成支付宝支付">
-<meta property="og:url" content="http://www.wangquanwei.com/2017-02-05-1.html">
-<meta property="og:site_name" content="王权伟の博客">
-<meta property="og:description" content="一、 开发前准备
-iOS 支付宝SDK下载地址：(内含iOS Android 服务端demo及SDK)
-http://doc.open.alipay.com/doc2/detail?treeId=59&amp;amp;articleId=103563&amp;amp;docType=1">
-<meta property="og:image" content="https://img.wangquanwei.com/ali1.png">
-<meta property="og:image" content="https://img.wangquanwei.com/ali2.png">
-<meta property="og:image" content="https://img.wangquanwei.com/ali3.png">
-<meta property="og:image" content="https://img.wangquanwei.com/ali4.png">
-<meta property="og:image" content="https://img.wangquanwei.com/ali5.png">
-<meta property="og:image" content="https://img.wangquanwei.com/ali6.png">
-<meta property="og:image" content="https://img.wangquanwei.com/ali7.png">
-<meta property="og:image" content="https://img.wangquanwei.com/ali8.png">
-<meta property="og:image" content="https://img.wangquanwei.com/ali9.png">
-<meta property="og:updated_time" content="2018-11-02T11:57:14.598Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS集成支付宝支付">
-<meta name="twitter:description" content="一、 开发前准备
-iOS 支付宝SDK下载地址：(内含iOS Android 服务端demo及SDK)
-http://doc.open.alipay.com/doc2/detail?treeId=59&amp;amp;articleId=103563&amp;amp;docType=1">
-<meta name="twitter:image" content="https://img.wangquanwei.com/ali1.png">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://www.wangquanwei.com/2017-02-05-1.html"/>
-
-
-
-
-
-  <title>iOS集成支付宝支付 | 王权伟の博客</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>王权伟の博客 - 好记性不如烂笔头</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="王权伟,"> 
+    <meta name="description" content="好记性不如烂笔头,"> 
+    <meta name="author" content="王权伟"> 
+    <link rel="alternative" href="atom.xml" title="王权伟の博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/avatar.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?5a6672e8545f0d238d33c35a4f4f89f5";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-right page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">王权伟の博客</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">iOS集成支付宝支付</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
     </div>
-      
-        <h1 class="site-subtitle" itemprop="description">好记性不如烂笔头</h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+    <div class="scrollbar"></div>
 </div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">iOS集成支付宝支付</h1>
+        <div class="stuff">
+            <span>二月 05, 2017</span>
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.wangquanwei.com/2017-02-05-1.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王权伟">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="王权伟の博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">iOS集成支付宝支付</h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-05T20:42:07+08:00">
-                2017-02-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017-02-05-1.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017-02-05-1.html" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv">本文总阅读量
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-
-          
 
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>一、 开发前准备</p>
+        <div class="content markdown">
+            <p>一、 开发前准备</p>
 <p>iOS 支付宝SDK下载地址：(内含iOS Android 服务端demo及SDK)</p>
 <p><a href="http://doc.open.alipay.com/doc2/detail?treeId=59&amp;articleId=103563&amp;docType=1" target="_blank" rel="external">http://doc.open.alipay.com/doc2/detail?treeId=59&amp;articleId=103563&amp;docType=1</a><br><img src="https://img.wangquanwei.com/ali1.png" alt=""><a id="more"></a></p>
 <p>二、 集成支付宝</p>
@@ -399,430 +59,98 @@ http://doc.open.alipay.com/doc2/detail?treeId=59&amp;amp;articleId=103563&amp;am
 <p>5、配置SDK路径<br><img src="https://img.wangquanwei.com/ali7.png" alt=""><br><img src="https://img.wangquanwei.com/ali8.png" alt=""><br>6、应用注册(支付宝支付要用)<br><img src="https://img.wangquanwei.com/ali9.png" alt=""><br>7、调用支付宝支付<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;AlipaySDK/AlipaySDK.h&gt;</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"Order.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"DataSigner.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"APAuthV2Info.h"</span></span></div></pre></td></tr></table></figure></p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#pragma mark -- 支付宝支付 --</span></div><div class="line">- (<span class="keyword">void</span>) aliPay&#123;</div><div class="line"></div><div class="line">    <span class="comment">/*============================================================================*/</span></div><div class="line">    <span class="comment">/*=======================需要填写商户app申请的===================================*/</span></div><div class="line">    <span class="comment">/*============================================================================*/</span></div><div class="line">    <span class="built_in">NSString</span> *partner = <span class="string">@" "</span>;</div><div class="line">    <span class="built_in">NSString</span> *seller = <span class="string">@" "</span>;</div><div class="line">    <span class="built_in">NSString</span> *privateKey = <span class="string">@" "</span>;</div><div class="line">    <span class="comment">/*============================================================================*/</span></div><div class="line">    <span class="comment">/*============================================================================*/</span></div><div class="line">    <span class="comment">/*============================================================================*/</span></div><div class="line"></div><div class="line">    <span class="comment">/*</span></div><div class="line">    *生成订单信息及签名</div><div class="line">    */</div><div class="line">    <span class="comment">//将商品信息赋予AlixPayOrder的成员变量</span></div><div class="line">    Order *order = [[Order alloc] init];</div><div class="line">    order.partner = partner;</div><div class="line">    order.seller = seller;</div><div class="line">    order.tradeNO = <span class="string">@"11111"</span>; <span class="comment">//订单ID（由商家自行制定）</span></div><div class="line">    order.productName = <span class="string">@"支付宝充值测试"</span>; <span class="comment">//商品标题</span></div><div class="line">    order.productDescription = <span class="string">@"支付宝充值测试"</span>; <span class="comment">//商品描述</span></div><div class="line">    order.amount = <span class="string">@"10"</span>; <span class="comment">//商品价格</span></div><div class="line">    order.notifyURL =  <span class="string">@"https://www.taobao.com"</span>; <span class="comment">//回调URL,具体回调URL由服务端提供（淘宝网地址乱写的）</span></div><div class="line"></div><div class="line">    <span class="comment">//固定用法</span></div><div class="line">    order.service = <span class="string">@"mobile.securitypay.pay"</span>;</div><div class="line">    order.paymentType = <span class="string">@"1"</span>;</div><div class="line">    order.inputCharset = <span class="string">@"utf-8"</span>;</div><div class="line">    order.itBPay = <span class="string">@"30m"</span>;</div><div class="line">    order.showUrl = <span class="string">@"m.alipay.com"</span>;</div><div class="line"></div><div class="line">    <span class="comment">//应用注册scheme,在Info.plist定义URL types</span></div><div class="line">    <span class="built_in">NSString</span> *appScheme = <span class="string">@"Pay"</span>;</div><div class="line"></div><div class="line">    <span class="comment">//将商品信息拼接成字符串</span></div><div class="line">    <span class="built_in">NSString</span> *orderSpec = [order description];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"orderSpec = %@"</span>,orderSpec);</div><div class="line"></div><div class="line">    <span class="comment">//获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode</span></div><div class="line">    <span class="keyword">id</span>&lt;DataSigner&gt; signer = CreateRSADataSigner(privateKey);</div><div class="line">    <span class="built_in">NSString</span> *signedString = [signer signString:orderSpec];</div><div class="line"></div><div class="line">    <span class="comment">//将签名成功字符串格式化为订单字符串,请严格按照该格式</span></div><div class="line">    <span class="built_in">NSString</span> *orderString = <span class="literal">nil</span>;</div><div class="line">    <span class="keyword">if</span> (signedString != <span class="literal">nil</span>) &#123;</div><div class="line">        orderString = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@&amp;sign=\"%@\"&amp;sign_type=\"%@\""</span>,</div><div class="line">        orderSpec, signedString, <span class="string">@"RSA"</span>];</div><div class="line"></div><div class="line">        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(<span class="built_in">NSDictionary</span> *resultDic) &#123;</div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"reslut = %@"</span>,resultDic);</div><div class="line"></div><div class="line">            <span class="keyword">if</span>([[resultDic valueForKey:<span class="string">@"resultStatus"</span>] integerValue] == <span class="number">6001</span>)&#123;</div><div class="line">                <span class="built_in">NSLog</span>(<span class="string">@"您取消了支付"</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> ([[resultDic valueForKey:<span class="string">@"resultStatus"</span>] integerValue] == <span class="number">9000</span>)&#123;</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;];</div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/images/weixin.jpg" alt="王权伟 WeChat Pay"/>
-          <p>微信打赏</p>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="true">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                    
+                        <li title='1' data-url='http://link.hhtjim.com/qq/001faIUs4M2zna.mp3'></li>
+                    
+                </ul>
+            
         </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/images/zhifubao.jpg" alt="王权伟 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
-
-
-      
-    </div>
-
-    <div>
-      
         
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='9df2b9438a95189bb534'
+        data-cs='149a3805a8ee33d02fadd626cac3e8239c494596'
+        data-r='quanweiwang.github.io'
+        data-o='quanweiwang'
+        data-a='quanweiwang'
+        data-d='false'
+    >查看评论</div>
 
-      
+
     </div>
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017-01-08-1.html" rel="next" title="iOS集成微信支付">
-                <i class="fa fa-chevron-left"></i> iOS集成微信支付
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017-02-06-1.html" rel="prev" title="iOS 隐藏导航栏时切换页面出现黑条的解决办法">
-                iOS 隐藏导航栏时切换页面出现黑条的解决办法 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.png"
-               alt="王权伟" />
-          <p class="site-author-name" itemprop="name">王权伟</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-           
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">24</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-          <div class="site-author motion-element" itemprop="advert" itemscope itemtype="http://schema.org/Person">
-            <a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=j42eulwe" target="_blank">
-              <img class="site-advert-image" itemprop="image"
-                  src="/images/250-250.png"
-                  alt="/images/250-250.png" />
-              <p class="site-advert-name" itemprop="name">点击领取最高￥1888云产品通用代金券</p>
-            </a>
-          </div>
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-heartƒ√"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">王权伟</span>
-  <!--以下3行为一条竖线和Coding Page-->
-  <div class="powered-by">  
-  </div>
-  <span>Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></span>
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+    </div>
 </div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-<div class=BbeiAn-info">
-  闽ICP备 -
-  <a href="http://www.miitbeian.gov.cn/">18024834号-1</a>
-  </a>
-</div>
-
-
-        
-<div class="busuanzi-count">
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-
-  
-    <span class="site-pv">
-      本站总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://wangquanwei.disqus.com/count.js" async></script>
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://www.wangquanwei.com/2017-02-05-1.html';
-          this.page.identifier = '2017-02-05-1.html';
-          this.page.title = 'iOS集成支付宝支付';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://wangquanwei.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
-
-  
-
-  
-
-  
-
 </body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 </html>
