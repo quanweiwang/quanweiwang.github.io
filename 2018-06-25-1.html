@@ -50,12 +50,12 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>近期在开发偶遇优选2.0时遇到一个奇葩异常：Cannot modify constraints for UITabBar managed by a controller。</p>
-<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><blockquote>
+            <h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>近期在开发偶遇优选2.0时遇到一个奇葩异常：Cannot modify constraints for UITabBar managed by a controller。</p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><blockquote>
 <p>自动布局只能使用在UIViews及其子类，也就是说工具栏之类的不能使用。</p>
 </blockquote>
 <a id="more"></a>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p><img src="https://img.wangquanwei.com/%E9%A6%96%E9%A1%B5.jpg" alt="image"></p>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p><img src="https://img.wangquanwei.com/%E9%A6%96%E9%A1%B5.jpg" alt="image"></p>
 <p>给UITabbarController的tabbar addSubView子视图（即红色线条那块），然后给子视图设置约束导致的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">self.bottomLineView = [[UIView alloc] init];</div><div class="line">self.bottomLineView.backgroundColor = RGB_HEX(0xcc5253);</div><div class="line">[self.tabBar addSubview:self.bottomLineView];</div><div class="line"></div><div class="line">[self.bottomLineView makeConstraints:^(MASConstraintMaker *make) &#123;</div><div class="line">    make.left.equalTo(self.tabBar);</div><div class="line">    make.width.equalTo(self.bottomLineViewWidth);</div><div class="line">    make.top.equalTo(self.tabBar);</div><div class="line">    make.height.equalTo(3);</div><div class="line">&#125;];</div></pre></td></tr></table></figure>
 <p>查阅api发现<br><img src="https://img.wangquanwei.com/875B69FE-847B-43C6-8FE6-6FA93147E7A6.png" alt="image"></p>
@@ -63,7 +63,7 @@
 <p>// Provided for -[UIActionSheet showFromTabBar:]. Attempting to modify  the contents of the tab bar directly will throw an exception.  </p>
 <p>//提供-[UIActionSheet showFromTabBar:]。尝试直接修改选项卡栏的内容将抛出异常。</p>
 </blockquote>
-<h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">self.bottomLineView = [[UIView alloc] initWithFrame:CGRectMake(0, -3, self.bottomLineViewWidth, 3)];</div><div class="line">self.bottomLineView.backgroundColor = RGB_HEX(0xcc5253);</div><div class="line">[self.tabBar addSubview:self.bottomLineView];</div></pre></td></tr></table></figure>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">self.bottomLineView = [[UIView alloc] initWithFrame:CGRectMake(0, -3, self.bottomLineViewWidth, 3)];</div><div class="line">self.bottomLineView.backgroundColor = RGB_HEX(0xcc5253);</div><div class="line">[self.tabBar addSubview:self.bottomLineView];</div></pre></td></tr></table></figure>
 <p>即把autolayout改为传统的计算frame。</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->

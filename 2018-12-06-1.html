@@ -50,14 +50,15 @@
 
         </div>
         <div class="content markdown">
-            <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>本文使用wkwebView进行JS与OC、OC与JS间的传值和方法调用。</p>
-<h1 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h1><p>1、导入WebKit.framework</p>
+            <p><img src="https://img.wangquanwei.com/2018-12-06-1.png" alt="image"></p>
+<h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>本文将介绍如何使用WKWebView进行JS与OC、OC与JS间的传值和方法调用。</p>
+<h4 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h4><p>1、导入WebKit.framework</p>
 <div align="center"><br><br><img src="https://img.wangquanwei.com/A2C47263-82A8-4C2C-AE00-8D0F4B2C7A1A.png" alt="image"><br><br></div>
 
 <p>2、声明WKWebView</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@interface ViewController ()</div><div class="line">@property (nonatomic, strong) WKWebView * webView;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h1 id="JS调用OC原生方法"><a href="#JS调用OC原生方法" class="headerlink" title="JS调用OC原生方法"></a>JS调用OC原生方法</h1><p>1、前端在js文件中实现</p>
+<h4 id="JS调用OC原生方法"><a href="#JS调用OC原生方法" class="headerlink" title="JS调用OC原生方法"></a>JS调用OC原生方法</h4><p>1、前端在js文件中实现</p>
 <p>这里要注意messageHandlers后面跟着的deviceInfo要与原生的定义的一致。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//有参数</div><div class="line">window.webkit.messageHandlers.deviceInfo.postMessage(&#123;</div><div class="line">        &quot;body&quot;: &quot;buttonActionMessage&quot;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//无参数</div><div class="line">window.webkit.messageHandlers.deviceInfo.postMessage(&quot;&quot;);</div></pre></td></tr></table></figure>
 <p>2、iOS 实现WKScriptMessageHandler协议</p>
@@ -68,7 +69,7 @@
 <p>4、iOS 实现WKScriptMessageHandler协议方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message &#123;</div><div class="line">    </div><div class="line">    if ([message.name isEqualToString:@&quot;deviceInfo&quot;]) &#123;</div><div class="line">        </div><div class="line">        NSString *deviceInfoStr = message.body;</div><div class="line">        NSLog(@&quot;deviceInfo:%@&quot;, deviceInfoStr);</div><div class="line">        </div><div class="line">        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@&quot;提示&quot; message:@&quot;JS调用的OC回调方法&quot; preferredStyle:UIAlertControllerStyleAlert];</div><div class="line">        UIAlertAction *action = [UIAlertAction actionWithTitle:@&quot;ok&quot; style:UIAlertActionStyleCancel handler:nil];</div><div class="line">        [alert addAction:action];</div><div class="line">        [self presentViewController:alert animated:YES completion:nil];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>message.body就是前端传来的参数</p>
-<h1 id="OC调用JS方法"><a href="#OC调用JS方法" class="headerlink" title="OC调用JS方法"></a>OC调用JS方法</h1><p>1、实现WKNavigationDelegate协议</p>
+<h4 id="OC调用JS方法"><a href="#OC调用JS方法" class="headerlink" title="OC调用JS方法"></a>OC调用JS方法</h4><p>1、实现WKNavigationDelegate协议</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@interface ViewController ()&lt;WKScriptMessageHandler,WKNavigationDelegate&gt;</div><div class="line">@property (nonatomic, strong) WKWebView * webView;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
 <p>2、实现WKNavigationDelegate协议的- webView: didFinishNavigation:方法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation &#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
