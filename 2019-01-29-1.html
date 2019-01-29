@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>王权伟の博客 - 好记性不如烂笔头</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="王权伟,"> 
+    <meta name="description" content="好记性不如烂笔头,"> 
+    <meta name="author" content="王权伟"> 
+    <link rel="alternative" href="atom.xml" title="王权伟の博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/avatar.jpg"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+</head>
+
+<body class="loading">
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Xcode Instruments系列之Leaks使用教程</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Xcode Instruments系列之Leaks使用教程</h1>
+        <div class="stuff">
+            <span>一月 29, 2019</span>
+            
+
+        </div>
+        <div class="content markdown">
+            <p><img src="https://img.wangquanwei.com/2018-12-06-1.png" alt="image"></p>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>最近几天在进行公司项目的测试，用到了Leaks进行内存泄露的检测。<br>鉴于网上千篇一律的旧版的教程，变萌生了写一篇针对新版Xcode面向萌新的教程。</p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>Xcode 10.1<br>Instruments</p>
+<h3 id="唤起Instruments面板"><a href="#唤起Instruments面板" class="headerlink" title="唤起Instruments面板"></a>唤起Instruments面板</h3><p>1、打开Xcode<br>2、按住command + I 或者 菜单栏Product - Profile（选择真机）<br><img src="https://img.wangquanwei.com/C3DC9C88-A44F-4334-B391-35D7036470B6.png" alt="image"><br>等待项目编译通过即可打开Instruments面板</p>
+<h3 id="Leaks的使用"><a href="#Leaks的使用" class="headerlink" title="Leaks的使用"></a>Leaks的使用</h3><p>1、选择Leaks双击 或者 按 choose<br><img src="https://img.wangquanwei.com/C1BDBB05-BAC2-4F76-8D62-78EAD5798BA3.png" alt="image"><br>2、打开Leaks面板<br><img src="https://img.wangquanwei.com/6299A396-5B4D-4BBD-A4FE-7203A60FDAFC.png" alt="image"><br>3、点击左上角红色点，即可运行内存检测<br>4、在运行过程中如果发现Leak Checks（如图）出现红色X说明检测到内存泄露<br><img src="https://img.wangquanwei.com/3B6883BE-B886-42CE-8A00-A0ADF6FA8641.png" alt="image"><br>5、定位内存泄露代码位置(如图)<br>第一步：选择Leaks有时候默认是 Run lssues（如图）<br><img src="https://img.wangquanwei.com/4F946E3A-26BF-4B0F-BE3D-F771B1A538D2.png" alt="image"><br>第二步：选择Call Tree<br><img src="https://img.wangquanwei.com/917D51E0-573C-496E-A568-F70FD251EA8E.png" alt="image"><br>然后呢都是一堆内存地址无法知晓哪里出现问题（如图）<br><img src="https://img.wangquanwei.com/86C47B1F-8047-420D-97B8-A0FD5C82AA8D.png" alt="image"><br>第三步：选择底部的Call Tree在弹窗中选择Invert Call Tree 和 Hide System Libraries，即可显示出具体内存泄漏的代码，但假如还不显示请看第四步（如图）<br><img src="https://img.wangquanwei.com/2603FB30-7FD9-4984-B614-C44C9B899CE7.png" alt="image"><br>第四步：如果第三步还无法定位到具体代码，则<br>点击项目工程文件-Buidl Setting-All-搜索Debug Information Format-Debug里选择DWARF with dSYM File<br>然后重新编译启动Leaks重复上面1-3步骤即可定位到具体代码<br><img src="https://img.wangquanwei.com/29672EA6-83A1-41D8-860A-840D663B47ED.png" alt="image">  </p>
+<p>例如这里就是我使用第三方库blocksKit，这个库存在内存泄漏<br><img src="https://img.wangquanwei.com/0B5B9306-ECA7-4901-A491-627CFF912D82.png" alt="image"></p>
+<h3 id="查看内存泄漏引用图"><a href="#查看内存泄漏引用图" class="headerlink" title="查看内存泄漏引用图"></a>查看内存泄漏引用图</h3><p>将Call Tree选项改为Cycles &amp; Roots 即可查看，不是所有的都可以查看。<br><img src="https://img.wangquanwei.com/20233F09-B7B9-4BD1-90CF-22D5367DDBC5.png" alt="image"></p>
+<h3 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h3>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title='0' data-url='https://link.hhtjim.com/qq/001T7NTt0GE6RU.mp3'></li>
+                    
+                        <li title='1' data-url='https://link.hhtjim.com/qq/002aZAIe1gk8KL.mp3'></li>
+                    
+                        <li title='2' data-url='https://link.hhtjim.com/qq/003MNjHn3MgszW.mp3'></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='9df2b9438a95189bb534'
+        data-cs='149a3805a8ee33d02fadd626cac3e8239c494596'
+        data-r='quanweiwang.github.io'
+        data-o='quanweiwang'
+        data-a='quanweiwang'
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
