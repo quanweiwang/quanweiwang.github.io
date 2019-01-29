@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wangquanwei.com/"/>
-  <updated>2019-01-29T14:35:14.900Z</updated>
+  <updated>2019-01-07T10:03:38.103Z</updated>
   <id>http://www.wangquanwei.com/</id>
   
   <author>
@@ -14,34 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Xcode Instruments系列之Leaks使用教程</title>
-    <link href="http://www.wangquanwei.com/2019-01-29-1.html"/>
-    <id>http://www.wangquanwei.com/2019-01-29-1.html</id>
-    <published>2019-01-29T14:35:08.000Z</published>
-    <updated>2019-01-29T14:35:14.900Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="https://img.wangquanwei.com/2018-12-06-1.png" alt="image"></p>
-<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>最近几天在进行公司项目的测试，用到了Leaks进行内存泄露的检测。<br>鉴于网上千篇一律的旧版的教程，变萌生了写一篇针对新版Xcode面向萌新的教程。</p>
-<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>Xcode 10.1<br>Instruments</p>
-<h3 id="唤起Instruments面板"><a href="#唤起Instruments面板" class="headerlink" title="唤起Instruments面板"></a>唤起Instruments面板</h3><p>1、打开Xcode<br>2、按住command + I 或者 菜单栏Product - Profile（选择真机）<br><img src="https://img.wangquanwei.com/C3DC9C88-A44F-4334-B391-35D7036470B6.png" alt="image"><br>等待项目编译通过即可打开Instruments面板</p>
-<h3 id="Leaks的使用"><a href="#Leaks的使用" class="headerlink" title="Leaks的使用"></a>Leaks的使用</h3><p>1、选择Leaks双击 或者 按 choose<br><img src="https://img.wangquanwei.com/C1BDBB05-BAC2-4F76-8D62-78EAD5798BA3.png" alt="image"><br>2、打开Leaks面板<br><img src="https://img.wangquanwei.com/6299A396-5B4D-4BBD-A4FE-7203A60FDAFC.png" alt="image"><br>3、点击左上角红色点，即可运行内存检测<br>4、在运行过程中如果发现Leak Checks（如图）出现红色X说明检测到内存泄露<br><img src="https://img.wangquanwei.com/3B6883BE-B886-42CE-8A00-A0ADF6FA8641.png" alt="image"><br>5、定位内存泄露代码位置(如图)<br>第一步：选择Leaks有时候默认是 Run lssues（如图）<br><img src="https://img.wangquanwei.com/4F946E3A-26BF-4B0F-BE3D-F771B1A538D2.png" alt="image"><br>第二步：选择Call Tree<br><img src="https://img.wangquanwei.com/917D51E0-573C-496E-A568-F70FD251EA8E.png" alt="image"><br>然后呢都是一堆内存地址无法知晓哪里出现问题（如图）<br><img src="https://img.wangquanwei.com/86C47B1F-8047-420D-97B8-A0FD5C82AA8D.png" alt="image"><br>第三步：选择底部的Call Tree在弹窗中选择Invert Call Tree 和 Hide System Libraries，即可显示出具体内存泄漏的代码，但假如还不显示请看第四步（如图）<br><img src="https://img.wangquanwei.com/2603FB30-7FD9-4984-B614-C44C9B899CE7.png" alt="image"><br>第四步：如果第三步还无法定位到具体代码，则<br>点击项目工程文件-Buidl Setting-All-搜索Debug Information Format-Debug里选择DWARF with dSYM File<br>然后重新编译启动Leaks重复上面1-3步骤即可定位到具体代码<br><img src="https://img.wangquanwei.com/29672EA6-83A1-41D8-860A-840D663B47ED.png" alt="image">  </p>
-<p>例如这里就是我使用第三方库blocksKit，这个库存在内存泄漏<br><img src="https://img.wangquanwei.com/0B5B9306-ECA7-4901-A491-627CFF912D82.png" alt="image"></p>
-<h3 id="查看内存泄漏引用图"><a href="#查看内存泄漏引用图" class="headerlink" title="查看内存泄漏引用图"></a>查看内存泄漏引用图</h3><p>将Call Tree选项改为Cycles &amp; Roots 即可查看，不是所有的都可以查看。<br><img src="https://img.wangquanwei.com/20233F09-B7B9-4BD1-90CF-22D5367DDBC5.png" alt="image"></p>
-<h3 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h3>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;https://img.wangquanwei.com/2018-12-06-1.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;
-    
-    </summary>
-    
-      <category term="Instruments" scheme="http://www.wangquanwei.com/categories/Instruments/"/>
-    
-    
-  </entry>
   
   <entry>
     <title>iOS 爱奇艺客户端多个UITabBar的几种技术实现</title>
@@ -89,6 +61,35 @@
     </summary>
     
       <category term="iOS" scheme="http://www.wangquanwei.com/categories/iOS/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Xcode Instruments系列之Leaks使用教程</title>
+    <link href="http://www.wangquanwei.com/2019-01-29-1.html"/>
+    <id>http://www.wangquanwei.com/2019-01-29-1.html</id>
+    <published>2018-12-06T06:17:08.000Z</published>
+    <updated>2019-01-29T14:53:03.098Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://img.wangquanwei.com/6D25636D-3D33-41C4-A402-713292D833AF" alt="image"></p>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>最近几天在进行公司项目的测试，用到了Leaks进行内存泄露的检测。<br>鉴于网上千篇一律的旧版教程，变萌生了写一篇针对新版Xcode面向萌新的教程。</p>
+<a id="more"></a>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>Xcode 10.1<br>Instruments</p>
+<h3 id="唤起Instruments面板"><a href="#唤起Instruments面板" class="headerlink" title="唤起Instruments面板"></a>唤起Instruments面板</h3><p>1、打开Xcode<br>2、按住command + I 或者 菜单栏Product - Profile（选择真机）<br><img src="https://img.wangquanwei.com/C3DC9C88-A44F-4334-B391-35D7036470B6.png" alt="image"><br>等待项目编译通过即可打开Instruments面板</p>
+<h3 id="Leaks的使用"><a href="#Leaks的使用" class="headerlink" title="Leaks的使用"></a>Leaks的使用</h3><p>1、选择Leaks双击 或者 按 choose<br><img src="https://img.wangquanwei.com/C1BDBB05-BAC2-4F76-8D62-78EAD5798BA3.png" alt="image"><br>2、打开Leaks面板<br><img src="https://img.wangquanwei.com/6299A396-5B4D-4BBD-A4FE-7203A60FDAFC.png" alt="image"><br>3、点击左上角红色点，即可运行内存检测<br>4、在运行过程中如果发现Leak Checks（如图）出现红色X说明检测到内存泄露,将鼠标点击Leak Checks，在下方即可看到内存泄漏的相关信息<br><img src="https://img.wangquanwei.com/3B6883BE-B886-42CE-8A00-A0ADF6FA8641.png" alt="image"><br>5、定位内存泄露代码位置(如图)<br>第一步：选择Leaks有时候默认是 Run lssues（如图）<br><img src="https://img.wangquanwei.com/4F946E3A-26BF-4B0F-BE3D-F771B1A538D2.png" alt="image"><br>第二步：选择Call Tree<br><img src="https://img.wangquanwei.com/917D51E0-573C-496E-A568-F70FD251EA8E.png" alt="image"><br>然后呢都是一堆内存地址无法知晓哪里出现问题（如图）<br><img src="https://img.wangquanwei.com/86C47B1F-8047-420D-97B8-A0FD5C82AA8D.png" alt="image"><br>第三步：选择底部的Call Tree在弹窗中选择Invert Call Tree 和 Hide System Libraries，即可显示出具体内存泄漏的代码，但假如还不显示请看第四步（如图）<br><img src="https://img.wangquanwei.com/2603FB30-7FD9-4984-B614-C44C9B899CE7.png" alt="image"><br>第四步：如果第三步还无法定位到具体代码，则<br>点击项目工程文件-Buidl Setting-All-搜索Debug Information Format-Debug里选择DWARF with dSYM File（如图）<br><img src="https://img.wangquanwei.com/097DD3E6-FB64-4EC4-922E-2A0D34FB6DBE.png" alt="image"><br>然后重新编译启动Leaks重复上面1-3步骤即可定位到具体代码<br><img src="https://img.wangquanwei.com/29672EA6-83A1-41D8-860A-840D663B47ED.png" alt="image">  </p>
+<p>例如这里就是我使用第三方库blocksKit，这个库存在内存泄漏<br><img src="https://img.wangquanwei.com/0B5B9306-ECA7-4901-A491-627CFF912D82.png" alt="image"></p>
+<h3 id="查看内存泄漏引用图"><a href="#查看内存泄漏引用图" class="headerlink" title="查看内存泄漏引用图"></a>查看内存泄漏引用图</h3><p>将Call Tree选项改为Cycles &amp; Roots 即可查看，不是所有的都可以查看。<br><img src="https://img.wangquanwei.com/20233F09-B7B9-4BD1-90CF-22D5367DDBC5.png" alt="image"></p>
+<h3 id="The-End"><a href="#The-End" class="headerlink" title="The End"></a>The End</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;https://img.wangquanwei.com/6D25636D-3D33-41C4-A402-713292D833AF&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h3&gt;&lt;p&gt;最近几天在进行公司项目的测试，用到了Leaks进行内存泄露的检测。&lt;br&gt;鉴于网上千篇一律的旧版教程，变萌生了写一篇针对新版Xcode面向萌新的教程。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Instruments" scheme="http://www.wangquanwei.com/categories/Instruments/"/>
     
     
   </entry>
