@@ -70,9 +70,9 @@
     <link href="http://www.wangquanwei.com/2019-01-29-1.html"/>
     <id>http://www.wangquanwei.com/2019-01-29-1.html</id>
     <published>2018-12-06T06:17:08.000Z</published>
-    <updated>2019-01-29T14:53:03.098Z</updated>
+    <updated>2019-01-29T15:03:55.424Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="https://img.wangquanwei.com/6D25636D-3D33-41C4-A402-713292D833AF" alt="image"></p>
+    <content type="html"><![CDATA[<p><img src="https://img.wangquanwei.com/6D25636D-3D33-41C4-A402-713292D833AF1" alt="image"></p>
 <h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>最近几天在进行公司项目的测试，用到了Leaks进行内存泄露的检测。<br>鉴于网上千篇一律的旧版教程，变萌生了写一篇针对新版Xcode面向萌新的教程。</p>
 <a id="more"></a>
 <h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>Xcode 10.1<br>Instruments</p>
@@ -84,7 +84,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;https://img.wangquanwei.com/6D25636D-3D33-41C4-A402-713292D833AF&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;img src=&quot;https://img.wangquanwei.com/6D25636D-3D33-41C4-A402-713292D833AF1&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
 &lt;h3 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h3&gt;&lt;p&gt;最近几天在进行公司项目的测试，用到了Leaks进行内存泄露的检测。&lt;br&gt;鉴于网上千篇一律的旧版教程，变萌生了写一篇针对新版Xcode面向萌新的教程。&lt;/p&gt;
     
     </summary>
