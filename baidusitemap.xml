@@ -4,6 +4,78 @@
 
     
   <url>
+    <loc>http://www.wangquanwei.com/2017-02-05-1.html</loc>
+    <lastmod>2019-02-05T10:24:39.540Z</lastmod>
+    <data>
+        <display>
+        <title>iOS集成支付宝支付</title>
+        <pubTime>2017-02-05T12:42:07.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wangquanwei.com/2017-01-08-1.html</loc>
+    <lastmod>2019-02-05T10:24:31.988Z</lastmod>
+    <data>
+        <display>
+        <title>iOS集成微信支付</title>
+        <pubTime>2017-01-08T09:24:49.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wangquanwei.com/2017-02-06-1.html</loc>
+    <lastmod>2019-02-05T10:24:10.639Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 隐藏导航栏时切换页面出现黑条的解决办法</title>
+        <pubTime>2017-02-06T13:44:20.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.wangquanwei.com/2017-02-23-1.html</loc>
+    <lastmod>2019-02-05T10:24:03.727Z</lastmod>
+    <data>
+        <display>
+        <title>Xcode打包无法生成iOS APP 而生成 Generic Xcode的解决办法</title>
+        <pubTime>2017-02-23T12:46:17.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.wangquanwei.com/2016-12-29-1.html</loc>
     <lastmod>2019-02-03T02:54:34.478Z</lastmod>
     <data>
@@ -202,24 +274,6 @@
 
     
   <url>
-    <loc>http://www.wangquanwei.com/2017-02-06-1.html</loc>
-    <lastmod>2019-01-05T05:35:38.034Z</lastmod>
-    <data>
-        <display>
-        <title>iOS 隐藏导航栏时切换页面出现黑条的解决办法</title>
-        <pubTime>2017-02-06T13:44:20.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.wangquanwei.com/2017-03-14-1.html</loc>
     <lastmod>2019-01-05T05:35:02.977Z</lastmod>
     <data>
@@ -381,61 +435,7 @@
     </url>
 
     
-  <url>
-    <loc>http://www.wangquanwei.com/2017-02-05-1.html</loc>
-    <lastmod>2019-01-03T10:00:10.527Z</lastmod>
-    <data>
-        <display>
-        <title>iOS集成支付宝支付</title>
-        <pubTime>2017-02-05T12:42:07.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
-  <url>
-    <loc>http://www.wangquanwei.com/2017-01-08-1.html</loc>
-    <lastmod>2019-01-03T09:54:36.254Z</lastmod>
-    <data>
-        <display>
-        <title>iOS集成微信支付</title>
-        <pubTime>2017-01-08T09:24:49.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-    
-  <url>
-    <loc>http://www.wangquanwei.com/2017-02-23-1.html</loc>
-    <lastmod>2018-11-02T11:57:33.805Z</lastmod>
-    <data>
-        <display>
-        <title>Xcode打包无法生成iOS APP 而生成 Generic Xcode的解决办法</title>
-        <pubTime>2017-02-23T12:46:17.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="iOS" url="http://www.wangquanwei.com/categories/iOS/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
     
   <url>
